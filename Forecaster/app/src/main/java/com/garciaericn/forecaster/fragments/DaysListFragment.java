@@ -1,4 +1,4 @@
-package com.garciaericn.forecaster;
+package com.garciaericn.forecaster.fragments;
 
 import android.app.ListFragment;
 
