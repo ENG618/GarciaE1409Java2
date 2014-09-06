@@ -15,7 +15,7 @@ Or...you can create blocks like this
 ```
 function myFunc(){
 	if(var test == null){
-	test = 0;
-}
+		test = 0;
+	}
 }
 ```
