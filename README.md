@@ -1,5 +1,5 @@
 # Eric Garcia
-===========
+
 ## Full Sail University
 ## MDVBS
 
