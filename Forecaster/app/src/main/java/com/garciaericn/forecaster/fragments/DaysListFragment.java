@@ -9,4 +9,8 @@ import android.app.ListFragment;
  */
 public class DaysListFragment extends ListFragment {
 
+    public void DaysListFragment(){};
+
+
+
 }
