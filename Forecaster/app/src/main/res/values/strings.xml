@@ -6,5 +6,9 @@
     <string name="action_settings">Settings</string>
     <string name="temp_day_of_week">Day of Week</string>
     <string name="temp_weather_condition">Overview of weather condition.</string>
+    <string name="label_weather_detail_title">Day of Week</string>
+    <string name="label_condition">Condition: </string>
+    <string name="lablel_forcast">Forecast: </string>
+    <string name="lable_icon_url">Icon URL: </string>
 
 </resources>

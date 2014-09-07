@@ -80,7 +80,7 @@ public class Weather implements Serializable{
     }
 
     // Create Weather object from bundle
-    public Bundle Weather(Bundle b) {
+    public Weather(Bundle b) {
         if (b != null) {
             this.dayOfWeek = b.getString(DAY_OF_WEEK);
             this.condition = b.getString(CONDITION);
