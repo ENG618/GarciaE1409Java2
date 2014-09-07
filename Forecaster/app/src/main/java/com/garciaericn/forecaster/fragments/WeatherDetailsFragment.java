@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.garciaericn.forecaster.R;
 import com.garciaericn.forecaster.data.Weather;
 
 /**
@@ -42,7 +44,18 @@ public class WeatherDetailsFragment extends Fragment {
 
         if (weather != null) {
             // Obtain and set all test views
+            TextView dayTV = (TextView) view.findViewById(R.id.dayTV);
+            dayTV.setText(weather.getDayOfWeek());
 
+            TextView conditionTV = (TextView) view.findViewById(R.id.conditionTV);
+            conditionTV.setText(weather.getCondition());
+
+            TextView forecastTV = (TextView) view.findViewById(R.id.forecastTV);
+            forecastTV.setText(weather.getForecastText());
+
+            TextView iconURLTV = (TextView) view.findViewById(R.id.iconURLTV);
+            iconURLTV.setText(weather.getIconURL());
         }
+        return view;
     }
 }
