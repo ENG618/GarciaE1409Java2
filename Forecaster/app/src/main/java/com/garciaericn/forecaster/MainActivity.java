@@ -29,10 +29,10 @@ public class MainActivity extends Activity {
 
     public static final String TAG = "MainActivity.TAG";
     private static String forecastURL;
-    private List<Weather> forecastArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG, "onCreate entered");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -68,16 +68,6 @@ public class MainActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-//    public ArrayList<Weather> parseRecipes(String stringData) {
-//        Log.i(TAG, "parseRecipes entered");
-//
-//        // Create instance of JSONParser
-//        JSONParser dataHandler = new JSONParser();
-//
-//        // Return parsed stringData
-//        return dataHandler; //.getRecipesJSON(stringData);
-//    }
 
     public boolean checkNetworkStatus(){
         Log.i(TAG, "checkNetworkStatus entered");
@@ -181,7 +171,7 @@ public class MainActivity extends Activity {
             Log.i(TAG, "Post Execute String: " + s);
 
             // Send JSON string to parsing method
-            forecastArray = JSONParser.parseForecast(s);
+            List<Weather> forecastArray = JSONParser.parseForecast(s);
             Log.i(TAG, "The fully parsed json toString(): " + forecastArray.toString());
 
             // TODO: send data to fragment
