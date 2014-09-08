@@ -69,7 +69,7 @@ public class Weather implements Serializable{
     }
 
     // Package data for transfer between fragments
-    public Bundle tobundle() {
+    public Bundle toBundle() {
         Bundle b = new Bundle();
         b.putString(DAY_OF_WEEK, this.dayOfWeek);
         b.putString(CONDITION, this.condition);

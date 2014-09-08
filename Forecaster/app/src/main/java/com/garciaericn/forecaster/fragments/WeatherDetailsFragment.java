@@ -24,6 +24,18 @@ public class WeatherDetailsFragment extends Fragment {
 
     // TODO: Create interface
 
+    public static WeatherDetailsFragment newInstance(Weather weather) {
+        Log.i(TAG, "newInstance entered");
+
+        WeatherDetailsFragment frag = new WeatherDetailsFragment();
+
+        // Bundle arguments
+        Bundle args = weather.toBundle();
+        frag.setArguments(args);
+
+        return frag;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate entered");

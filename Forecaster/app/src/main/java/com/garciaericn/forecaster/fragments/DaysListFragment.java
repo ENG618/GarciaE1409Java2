@@ -3,7 +3,9 @@ package com.garciaericn.forecaster.fragments;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.garciaericn.forecaster.R;
 import com.garciaericn.forecaster.data.Weather;
@@ -21,7 +23,13 @@ public class DaysListFragment extends ListFragment {
     public static final String TAG = "DaysListFragment.TAG";
     private static List<Weather> forecastList;
 
-    public void DaysListFragment(){};
+    public interface Callbacks {
+        public void onItemSelected(Weather weather, int position);
+    }
+
+    public DaysListFragment(){
+
+    }
 
     public static DaysListFragment newInstance(List<Weather> forecastArray) {
         Log.i(TAG, "newInstance entered");
@@ -40,5 +48,17 @@ public class DaysListFragment extends ListFragment {
         setListAdapter(adapter);
     }
 
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        Log.i(TAG, "onListItemClick entered");
+        Weather weather = forecastList.get(position);
 
+        WeatherDetailsFragment frag = (WeatherDetailsFragment) getFragmentManager().findFragmentByTag(WeatherDetailsFragment.TAG);
+        if (frag == null) {
+            frag = WeatherDetailsFragment.newInstance(weather);
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.weather_detail_container, frag, WeatherDetailsFragment.TAG);
+        }
+    }
 }

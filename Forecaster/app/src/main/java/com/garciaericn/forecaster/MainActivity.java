@@ -22,12 +22,14 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity
+    implements DaysListFragment.Callbacks{
     public static final String TAG = "MainActivity.TAG";
+    private static final String POSITION = "com.garciaericn.forecaster.POSITION";
+    private static final String WEATHERBUNDLE = "com.garciaericn.forecaster.WEATHERBUNDLE";
     private static String forecastURL;
     private List<Weather> forecastArray;
 
@@ -157,6 +159,12 @@ public class MainActivity extends Activity {
         return response;
     }
 
+    @Override
+    public void onItemSelected(Weather weather, int position) {
+        Bundle b = weather.toBundle();
+        b.putInt(POSITION, position);
+    }
+
     // Obtain data from api
     private class getData extends AsyncTask<String, Void, String> {
 
@@ -185,8 +193,8 @@ public class MainActivity extends Activity {
             Log.i(TAG, "The fully parsed json toString(): " + forecastArray.toString());
 
             // TODO: send data to fragment
-//
-//            // Create FragmentManager and Transaction
+
+            // Create FragmentManager and Transaction
             FragmentManager mgr = getFragmentManager();
             FragmentTransaction trans = mgr.beginTransaction();
             // Populate weather list fragment into container
