@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.garciaericn.forecaster.data.JSONParser;
 import com.garciaericn.forecaster.data.Weather;
+import com.garciaericn.forecaster.fragments.DaysListFragment;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -181,18 +182,18 @@ public class MainActivity extends Activity {
 
             // Send JSON string to parsing method
             forecastArray = JSONParser.parseForecast(s);
-//            Log.i(TAG, "The fully parsed json toString(): " + forecastArray.toString());
+            Log.i(TAG, "The fully parsed json toString(): " + forecastArray.toString());
 
             // TODO: send data to fragment
 //
 //            // Create FragmentManager and Transaction
-//            FragmentManager mgr = getFragmentManager();
-//            FragmentTransaction trans = mgr.beginTransaction();
-//            // Populate recipe list fragment into container
-//            RecipeListFragment listFrag = RecipeListFragment.newInstance(searchedRecipesArray);
-//            trans.replace(R.id.list_fragment_container, listFrag, RecipeListFragment.TAG);
-//            // Commit transaction
-//            trans.commit();
+            FragmentManager mgr = getFragmentManager();
+            FragmentTransaction trans = mgr.beginTransaction();
+            // Populate weather list fragment into container
+            DaysListFragment listFragment = DaysListFragment.newInstance(forecastArray);
+            trans.replace(R.id.days_list, listFragment, DaysListFragment.TAG);
+            // Commit transaction
+            trans.commit();
 
             super.onPostExecute(s);
         }
