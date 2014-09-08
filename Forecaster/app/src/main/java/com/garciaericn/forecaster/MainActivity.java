@@ -172,8 +172,6 @@ public class MainActivity extends Activity {
             List<Weather> forecastArray = JSONParser.parseForecast(s);
             Log.i(TAG, "The fully parsed json toString(): " + forecastArray.toString());
 
-            // TODO: send data to fragment
-
             // Populate weather list fragment into container
             DaysListFragment listFragment = DaysListFragment.newInstance(forecastArray);
 
