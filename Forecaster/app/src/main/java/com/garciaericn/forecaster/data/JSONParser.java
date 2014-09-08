@@ -29,33 +29,29 @@ public class JSONParser {
             JSONObject data = new JSONObject(jsonString);
 
             // Create Array of weather objects
-            JSONArray forecast = data.getJSONArray("forecast");
-            JSONObject txtForecast = forecast.getJSONObject(Integer.parseInt("txt_forecast"));
-            JSONObject simpeForecast = forecast.getJSONObject(Integer.parseInt("simpleforecast"));
+            JSONObject forecast = new JSONObject(data.getJSONObject("forecast").toString());
+            JSONObject txtForecast = new JSONObject(forecast.getJSONObject("txt_forecast").toString());
+            JSONArray forecastDay = txtForecast.getJSONArray("forecastday");
+
+
+            // TODO: Add more details to weather object with following info.
+//            JSONObject simpleForecast = forecast.getJSONObject(forecast.getJSONObject("simpleforecast").toString());
+//            JSONArray simpleForecastDay = simpleForecast.getJSONArray("forecastday");
 
             // Loop through recipesJSON for desired info
-            for (int i = 0; i < txtForecast.length(); i++) {
-                Log.i(TAG, "In for loop at index: " + i + " Object: " + forecast.getJSONObject(i));
+            for (int i = 0; i < forecastDay.length(); i++) {
+                Log.i(TAG, "In for loop at index: " + i + " Object: " + forecastDay.getJSONObject(i));
 
                 // Obtain Fields
-//                String dayOfWeek = forecast.getJSONObject(i);
-//                String condition;
-//                String forecastText;
-//                String iconURL;
+                String dayOfWeek = forecastDay.getJSONObject(i).getString("title");
+                String condition = forecastDay.getJSONObject(i).getString("icon");
+                String forecastText = forecastDay.getJSONObject(i).getString("fcttext");
+                String iconURL = forecastDay.getJSONObject(i).getString("icon_url");
 
-//                // Obtain Fields
-//                String recipeID = matches.getJSONObject(i).getString("id");
-//                String recipeName = matches.getJSONObject(i).getString("recipeName");
-//                String sourceName = matches.getJSONObject(i).getString("sourceDisplayName");
-//                String imgURL = matches.getJSONObject(i).getString("smallImageUrls");
-//                //int cookTimeInSecondsInt = matches.getJSONObject(i).getInt("totalTimeInSeconds");
-//                //String cookTimeInSeconds = matches.getJSONObject(i).getString("totalTimeInSeconds");
-//                String course = matches.getJSONObject(i).getJSONObject("attributes").getString("course");
+                // Create instance of Weather
+                Weather tempWeather = new Weather(dayOfWeek, condition, forecastText, iconURL);
 
-                // Create instance of Recipe
-//                Recipe tempRecipe = new Recipe(recipeName,recipeID, sourceName, imgURL, course);
-//
-//                recipesJSON.add(tempRecipe);
+                weatherJSON.add(tempWeather);
             }
         } catch (JSONException e) {
             e.printStackTrace();
