@@ -2,9 +2,12 @@ package com.garciaericn.forecaster.fragments;
 
 import android.app.ListFragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 
+import com.garciaericn.forecaster.R;
 import com.garciaericn.forecaster.data.Weather;
+import com.garciaericn.forecaster.data.WeatherAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +24,7 @@ public class DaysListFragment extends ListFragment {
     public void DaysListFragment(){};
 
     public static DaysListFragment newInstance(List<Weather> forecastArray) {
+        Log.i(TAG, "newInstance entered");
         DaysListFragment frag = new DaysListFragment();
         forecastList = forecastArray;
 
@@ -29,16 +33,10 @@ public class DaysListFragment extends ListFragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        Log.i(TAG, "onActivityCreated entered");
         super.onActivityCreated(savedInstanceState);
 
-        // Create string array of Days
-        ArrayList<String> dayOfWeek = new ArrayList<String>();
-
-        for (Weather weather : forecastList) {
-            dayOfWeek.add(weather.getDayOfWeek());
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, dayOfWeek);
+        WeatherAdapter adapter = new WeatherAdapter(getActivity(), R.layout.weather_list_item, forecastList);
         setListAdapter(adapter);
     }
 
