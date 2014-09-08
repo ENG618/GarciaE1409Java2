@@ -8,6 +8,7 @@ import android.app.ListFragment;
  * Created by ENG618-Mac on 9/6/14.
  */
 public class DaysListFragment extends ListFragment {
+    public static final String TAG = "DaysListFragment.TAG";
 
     public void DaysListFragment(){};
 
