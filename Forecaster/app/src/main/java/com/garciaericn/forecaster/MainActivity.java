@@ -28,7 +28,6 @@ import java.util.List;
 public class MainActivity extends Activity {
 
     public static final String TAG = "MainActivity.TAG";
-    private static final String POSITION = "com.garciaericn.forecaster.POSITION";
     private static String forecastURL;
     private List<Weather> forecastArray;
 
@@ -156,12 +155,6 @@ public class MainActivity extends Activity {
         }
 
         return response;
-    }
-
-    @Override
-    public void onItemSelected(Weather weather, int position) {
-        Bundle b = weather.toBundle();
-        b.putInt(POSITION, position);
     }
 
     // Obtain data from api
