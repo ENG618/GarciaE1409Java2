@@ -25,11 +25,10 @@ import java.net.URLConnection;
 import java.util.List;
 
 
-public class MainActivity extends Activity
-    implements DaysListFragment.Callbacks{
+public class MainActivity extends Activity {
+
     public static final String TAG = "MainActivity.TAG";
     private static final String POSITION = "com.garciaericn.forecaster.POSITION";
-    private static final String WEATHERBUNDLE = "com.garciaericn.forecaster.WEATHERBUNDLE";
     private static String forecastURL;
     private List<Weather> forecastArray;
 

@@ -23,9 +23,10 @@ public class DaysListFragment extends ListFragment {
     public static final String TAG = "DaysListFragment.TAG";
     private static List<Weather> forecastList;
 
-    public interface Callbacks {
-        public void onItemSelected(Weather weather, int position);
-    }
+    // TODO: Set up Callbacks to communicate between activities
+//    public interface Callbacks {
+//        public void onItemSelected(Weather weather, int position);
+//    }
 
     public DaysListFragment(){
 
