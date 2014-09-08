@@ -1,5 +1,6 @@
 package com.garciaericn.forecaster.data;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,9 +30,13 @@ public class WeatherAdapter extends ArrayAdapter<Weather> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.weather_list_item, parent, false);
-        }
+//        if (convertView == null) {
+//            convertView = LayoutInflater.from(context).inflate(R.layout.weather_list_item, parent, false);
+//        }
+
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+
+        View view = inflater.inflate(R.layout.weather_list_item, null);
 
         Weather weather = objects.get(position);
 
@@ -41,6 +46,7 @@ public class WeatherAdapter extends ArrayAdapter<Weather> {
         TextView overview = (TextView) convertView.findViewById(R.id.overviewTV);
         overview.setText(weather.getCondition());
 
-        return convertView;
+//        return convertView;
+        return view;
     }
 }
