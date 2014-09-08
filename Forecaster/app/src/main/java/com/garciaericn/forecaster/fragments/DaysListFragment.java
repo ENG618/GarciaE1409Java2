@@ -4,14 +4,12 @@ import android.app.ListFragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.garciaericn.forecaster.R;
 import com.garciaericn.forecaster.data.Weather;
 import com.garciaericn.forecaster.data.WeatherAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,7 +57,8 @@ public class DaysListFragment extends ListFragment {
             frag = WeatherDetailsFragment.newInstance(weather);
             getFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.weather_detail_container, frag, WeatherDetailsFragment.TAG);
+                    .replace(R.id.weather_detail_container, frag, WeatherDetailsFragment.TAG)
+                    .commit();
         }
     }
 }

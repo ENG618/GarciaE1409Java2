@@ -2,8 +2,6 @@ package com.garciaericn.forecaster;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -176,14 +174,14 @@ public class MainActivity extends Activity {
 
             // TODO: send data to fragment
 
-            // Create FragmentManager and Transaction
-            FragmentManager mgr = getFragmentManager();
-            FragmentTransaction trans = mgr.beginTransaction();
             // Populate weather list fragment into container
             DaysListFragment listFragment = DaysListFragment.newInstance(forecastArray);
-            trans.replace(R.id.days_list, listFragment, DaysListFragment.TAG);
-            // Commit transaction
-            trans.commit();
+
+            // Create FragmentManager and Transaction
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.days_list, listFragment, DaysListFragment.TAG)
+                    .commit();
 
             super.onPostExecute(s);
         }
