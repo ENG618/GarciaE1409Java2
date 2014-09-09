@@ -7,7 +7,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -91,6 +90,10 @@ public class MainActivity extends Activity {
 
                 return true;
             }
+            case R.id.action_refresh: {
+                // Call api to get current forecast
+                searchWeatherUnderground();
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -136,8 +139,8 @@ public class MainActivity extends Activity {
             BufferedReader reader = new BufferedReader(inReader);
 
             // Read data and pass to StringBuffer
-            StringBuffer buffer = new StringBuffer();
-            String text = null;
+            StringBuilder buffer = new StringBuilder();
+            String text;
             // Make sure a line of text is available to be read
             while ((text = reader.readLine()) != null) {
                 buffer.append(text);
