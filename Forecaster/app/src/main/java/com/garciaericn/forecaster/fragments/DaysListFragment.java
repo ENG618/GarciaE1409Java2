@@ -42,17 +42,22 @@ public class DaysListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        WeatherAdapter adapter = new WeatherAdapter(getActivity(), R.layout.weather_list_item, forecastList);
-        setListAdapter(adapter);
+//        if (forecastList != null) {
+//            WeatherAdapter adapter = new WeatherAdapter(getActivity(), R.layout.weather_list_item, forecastList);
+//            setListAdapter(adapter);
+//        }
     }
 
-//    @Override
-//    public void onActivityCreated(Bundle savedInstanceState) {
-//        Log.i(TAG, "onActivityCreated entered");
-//        super.onActivityCreated(savedInstanceState);
-//
-//
-//    }
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        Log.i(TAG, "onActivityCreated entered");
+        super.onActivityCreated(savedInstanceState);
+
+        if (forecastList != null) {
+            WeatherAdapter adapter = new WeatherAdapter(getActivity(), R.layout.weather_list_item, forecastList);
+            setListAdapter(adapter);
+        }
+    }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {

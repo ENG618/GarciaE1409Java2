@@ -40,10 +40,10 @@ public class WeatherAdapter extends ArrayAdapter<Weather> {
 
         Weather weather = objects.get(position);
 
-        TextView dayTV = (TextView) convertView.findViewById(R.id.dayOfWeekTV);
+        TextView dayTV = (TextView) view.findViewById(R.id.dayOfWeekTV);
         dayTV.setText(weather.getDayOfWeek());
 
-        TextView overview = (TextView) convertView.findViewById(R.id.overviewTV);
+        TextView overview = (TextView) view.findViewById(R.id.overviewTV);
         overview.setText(weather.getCondition());
 
 //        return convertView;
