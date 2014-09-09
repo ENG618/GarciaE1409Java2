@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +18,8 @@ import com.garciaericn.forecaster.data.Weather;
 import com.garciaericn.forecaster.fragments.DaysListFragment;
 
 import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -26,6 +29,8 @@ import java.util.List;
 public class MainActivity extends Activity {
 
     public static final String TAG = "MainActivity.TAG";
+    private static final String FILENAME = "SavedWeatherData";
+    private Context context;
     private static String forecastURL;
 
     @Override
@@ -33,6 +38,8 @@ public class MainActivity extends Activity {
         Log.i(TAG, "onCreate entered");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        context = this;
 
         // Call api to get current forecast
         searchWeatherUnderground();
@@ -65,6 +72,23 @@ public class MainActivity extends Activity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void writeToFile(Context context, String fileName, String data) {
+        // Store data in "protected" directory
+        File external = context.getExternalFilesDir(null);
+        File file = new File(external, fileName);
+
+        try {
+            //Create new output stream
+            FileOutputStream fos = new FileOutputStream(file);
+            // Convert string to byte and write to stream
+            fos.write(data.getBytes());
+            // Close the stream to sve the file
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean checkNetworkStatus(){
@@ -168,12 +192,14 @@ public class MainActivity extends Activity {
             Log.i(TAG, "onPostExecute entered");
             Log.i(TAG, "Post Execute String: " + s);
 
+            writeToFile(context, FILENAME, s);
+
             // Send JSON string to parsing method
-            List<Weather> forecastArray = JSONParser.parseForecast(s);
-            Log.i(TAG, "The fully parsed json toString(): " + forecastArray.toString());
+            List<Weather> forecastList = JSONParser.parseForecast(s);
+            Log.i(TAG, "The fully parsed json toString(): " + forecastList.toString());
 
             // Populate weather list fragment into container
-            DaysListFragment listFragment = DaysListFragment.newInstance(forecastArray);
+            DaysListFragment listFragment = DaysListFragment.newInstance(forecastList);
 
             // Create FragmentManager and Transaction
             getFragmentManager()
