@@ -176,7 +176,7 @@ public class MainActivity extends Activity {
         }
         else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("To get accurate updated information please connect your device to the internet")
+            builder.setMessage("To get updated information please connect your device to the internet")
                     .setTitle("No internet Connection")
                     .create()
                     .show();
