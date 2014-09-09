@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:textAppearance="?android:textAppearanceMedium"
-                android:text="@string/lablel_forcast"
+                android:text="@string/label_forecast"
                 android:id="@+id/forecastLabel" />
 
             <TextView
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:textAppearance="?android:textAppearanceMedium"
-                android:text="@string/lable_icon_url"
+                android:text="@string/label_icon_url"
                 android:id="@+id/iconURLLabel" />
 
             <TextView

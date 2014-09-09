@@ -8,7 +8,8 @@
     <string name="temp_weather_condition">Overview of weather condition.</string>
     <string name="label_weather_detail_title">Day of Week</string>
     <string name="label_condition">Condition: </string>
-    <string name="lablel_forcast">Forecast: </string>
-    <string name="lable_icon_url">Icon URL: </string>
+    <string name="label_forecast">Forecast: </string>
+    <string name="label_icon_url">Icon URL: </string>
+    <string name="action_refresh">Refresh</string>
 
 </resources>
