@@ -38,15 +38,11 @@ public class DaysListFragment extends ListFragment {
         return frag;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-//        if (forecastList != null) {
-//            WeatherAdapter adapter = new WeatherAdapter(getActivity(), R.layout.weather_list_item, forecastList);
-//            setListAdapter(adapter);
-//        }
-    }
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//
+//    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -69,8 +65,10 @@ public class DaysListFragment extends ListFragment {
             frag = WeatherDetailsFragment.newInstance(weather);
             getFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.weather_detail_container, frag, WeatherDetailsFragment.TAG)
+                    .replace(R.id.weather_detail_fragment, frag)
                     .commit();
+        } else {
+            frag.setDetailText(weather);
         }
     }
 }

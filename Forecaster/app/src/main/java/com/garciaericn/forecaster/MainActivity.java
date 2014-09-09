@@ -178,7 +178,7 @@ public class MainActivity extends Activity {
             // Create FragmentManager and Transaction
             getFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.days_list, listFragment, DaysListFragment.TAG)
+                    .replace(R.id.days_list_fragment, listFragment, DaysListFragment.TAG)
                     .commit();
 
             super.onPostExecute(s);

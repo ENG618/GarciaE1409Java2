@@ -52,22 +52,44 @@ public class WeatherDetailsFragment extends Fragment {
         Log.i(TAG, "onCreateView entered");
 
         // Load layout
-        View view = inflater.inflate(R.layout.detail_fragment, container, false);
+        return inflater.inflate(R.layout.detail_fragment, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        Log.i(TAG, "onActivityCreated entered");
+        super.onActivityCreated(savedInstanceState);
 
         if (weather != null) {
             // Obtain and set all test views
-            TextView dayTV = (TextView) view.findViewById(R.id.dayTV);
+            TextView dayTV = (TextView) getView().findViewById(R.id.dayTV);
             dayTV.setText(weather.getDayOfWeek());
 
-            TextView conditionTV = (TextView) view.findViewById(R.id.conditionTV);
+            TextView conditionTV = (TextView) getView().findViewById(R.id.conditionTV);
             conditionTV.setText(weather.getCondition());
 
-            TextView forecastTV = (TextView) view.findViewById(R.id.forecastTV);
+            TextView forecastTV = (TextView) getView().findViewById(R.id.forecastTV);
             forecastTV.setText(weather.getForecastText());
 
-            TextView iconURLTV = (TextView) view.findViewById(R.id.iconURLTV);
+            TextView iconURLTV = (TextView) getView().findViewById(R.id.iconURLTV);
             iconURLTV.setText(weather.getIconURL());
         }
-        return view;
+
+    }
+
+    public void setDetailText(Weather weather) {
+        // Obtain & set textViews
+        TextView dayTV = (TextView) getView().findViewById(R.id.dayTV);
+        dayTV.setText(weather.getDayOfWeek());
+
+        TextView conditionTV = (TextView) getView().findViewById(R.id.conditionTV);
+        conditionTV.setText(weather.getCondition());
+
+        TextView forecastTV = (TextView) getView().findViewById(R.id.forecastTV);
+        forecastTV.setText(weather.getForecastText());
+
+        TextView iconURLTV = (TextView) getView().findViewById(R.id.iconURLTV);
+        iconURLTV.setText(weather.getIconURL());
+
     }
 }
