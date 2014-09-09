@@ -42,7 +42,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Cache context
         context = this;
+
+        // Check network
+        checkNetworkStatus();
 
         // Check if saved data exists...if so load saved data
         if (checkFile(FILENAME)) {
@@ -158,7 +162,7 @@ public class MainActivity extends Activity {
 
     public boolean checkNetworkStatus(){
         Log.i(TAG, "checkNetworkStatus entered");
-        boolean isConnected;
+        boolean isConnected = false;
 
         //Create connectivity manager
         ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -171,8 +175,11 @@ public class MainActivity extends Activity {
             isConnected = true;
         }
         else {
-            Toast.makeText(this, "Please connect to internet to search", Toast.LENGTH_SHORT).show();
-            isConnected = false;
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("To get accurate updated information please connect your device to the internet")
+                    .setTitle("No internet Connection")
+                    .create()
+                    .show();
         }
         return isConnected;
     }
