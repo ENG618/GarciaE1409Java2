@@ -45,10 +45,25 @@ public class MainActivity extends Activity {
 
         context = this;
 
-        readFromFile(FILENAME);
+        // Check if saved data exists...if so load saved data
+        if (checkFile(FILENAME)) {
 
-        // Call api to get current forecast
-        searchWeatherUnderground();
+            // Send JSON string to parsing method
+            List<Weather> forecastList = JSONParser.parseForecast(readFromFile(FILENAME));
+
+            // Populate weather list fragment into container
+            DaysListFragment listFragment = DaysListFragment.newInstance(forecastList);
+
+            // Create FragmentManager and Transaction
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.days_list_fragment, listFragment, DaysListFragment.TAG)
+                    .commit();
+        } else { // Otherwise get new data from api
+            // Call api to get current forecast
+            searchWeatherUnderground();
+        }
+
     }
 
 
@@ -96,6 +111,14 @@ public class MainActivity extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private Boolean checkFile (String fileName) {
+        Log.i(TAG, "checkFile entered");
+        // Store data in "protected" directory
+        File external = context.getExternalFilesDir(null);
+        File file = new File(external, fileName);
+        return file.exists();
     }
 
     private String readFromFile(String fileName) {
@@ -173,8 +196,8 @@ public class MainActivity extends Activity {
             // Preform search
             getData data = new getData();
             data.execute(getForecastURL());
-            }
         }
+    }
 
     // Fetch URL
     private static String getResponse(URL url) {
