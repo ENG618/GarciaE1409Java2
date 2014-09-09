@@ -18,9 +18,13 @@ import com.garciaericn.forecaster.data.Weather;
 import com.garciaericn.forecaster.fragments.DaysListFragment;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
@@ -40,6 +44,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         context = this;
+
+        readFromFile(FILENAME);
 
         // Call api to get current forecast
         searchWeatherUnderground();
@@ -75,6 +81,7 @@ public class MainActivity extends Activity {
     }
 
     private void writeToFile(Context context, String fileName, String data) {
+        Log.i(TAG, "writeToFile entered");
         // Store data in "protected" directory
         File external = context.getExternalFilesDir(null);
         File file = new File(external, fileName);
@@ -89,6 +96,38 @@ public class MainActivity extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private String readFromFile(String fileName) {
+        Log.i(TAG, "readFromFile entered");
+
+        String savedWeatherString = null;
+
+        File external = getExternalFilesDir(null);
+        File file = new File(external, fileName);
+
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            // Create stream readers
+            InputStreamReader inReader = new InputStreamReader(fis);
+            BufferedReader reader = new BufferedReader(inReader);
+
+            // Read data and pass to StringBuffer
+            StringBuffer buffer = new StringBuffer();
+            String text = null;
+            // Make sure a line of text is available to be read
+            while ((text = reader.readLine()) != null) {
+                buffer.append(text);
+            }
+            Log.i(TAG, "String from file: " + buffer.toString());
+
+            savedWeatherString = buffer.toString();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return savedWeatherString;
     }
 
     public boolean checkNetworkStatus(){
