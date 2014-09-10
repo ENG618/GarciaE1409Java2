@@ -16,7 +16,8 @@
 
     <TableLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="10dp" >
 
         <TableRow>
             <TextView
@@ -24,13 +25,15 @@
                 android:layout_weight="0"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:text="@string/label_condition"
-                android:id="@+id/conditionLabel" />
+                android:id="@+id/conditionLabel"
+                android:padding="5dp" />
 
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:ems="10"
-                android:id="@+id/conditionTV"/>
+                android:id="@+id/conditionTV"
+                android:padding="5dp" />
 
         </TableRow>
 
@@ -40,13 +43,15 @@
                 android:layout_weight="0"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:text="@string/label_forecast"
-                android:id="@+id/forecastLabel" />
+                android:id="@+id/forecastLabel"
+                android:padding="5dp" />
 
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:ems="10"
-                android:id="@+id/forecastTV"/>
+                android:id="@+id/forecastTV"
+                android:padding="5dp" />
 
         </TableRow>
 
@@ -56,13 +61,15 @@
                 android:layout_weight="0"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:text="@string/label_icon_url"
-                android:id="@+id/iconURLLabel" />
+                android:id="@+id/iconURLLabel"
+                android:padding="5dp"/>
 
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:ems="10"
-                android:id="@+id/iconURLTV"/>
+                android:id="@+id/iconURLTV"
+                android:padding="5dp" />
 
         </TableRow>
 
