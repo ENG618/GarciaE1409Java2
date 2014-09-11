@@ -3,6 +3,7 @@ package com.garciaericn.forecaster;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -33,6 +34,8 @@ public class MainActivity extends Activity {
 
     public static final String TAG = "MainActivity.TAG";
     private static final String FILENAME = "SavedWeatherData";
+
+    private SharedPreferences settings;
     private Context context;
     private static String forecastURL;
 
@@ -42,8 +45,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Cache context
+        // Cache context & preferences
         context = this;
+        settings = getPreferences(MODE_PRIVATE);
 
         // Check network
         checkNetworkStatus();
