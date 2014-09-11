@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Data">
+
+        <Preference
+            android:key="CLEAR_CACHE"
+            android:title="Clear Cache"
+            android:summary="Clear all stored weather data from device." />
+
+        <CheckBoxPreference
+            android:key="LOAD_PREF"
+            android:title="Network Default"
+            android:summary="Load current data when network available"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
