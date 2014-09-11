@@ -90,6 +90,8 @@ public class MainActivity extends Activity {
 
         switch (id) {
             case R.id.action_settings: {
+                // TODO: Load preferencesFragment
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("Setting fragment would go here.")
                         .setTitle("Settings")
