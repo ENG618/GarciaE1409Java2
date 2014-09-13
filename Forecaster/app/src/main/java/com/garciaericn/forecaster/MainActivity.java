@@ -73,7 +73,11 @@ public class MainActivity extends Activity {
                         .replace(R.id.days_list_fragment, listFragment, DaysListFragment.TAG)
                         .commit();
             } else {
-                // TODO: Alert user no saved data, must refresh manually
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("There is no saved weather data at this time.  You must manually refresh data")
+                        .setTitle("No saved data")
+                        .create()
+                        .show();
             }
         }
     }
