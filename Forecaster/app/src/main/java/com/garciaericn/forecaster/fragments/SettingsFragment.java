@@ -3,8 +3,12 @@ package com.garciaericn.forecaster.fragments;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.util.Log;
 
+import com.garciaericn.forecaster.MainActivity;
 import com.garciaericn.forecaster.R;
+
+import java.io.File;
 
 /**
  * Full Sail University
@@ -14,6 +18,7 @@ import com.garciaericn.forecaster.R;
 public class SettingsFragment extends PreferenceFragment {
 
     private static final String CLEAR_CACHE = "CLEAR_CACHE";
+    private static final String TAG = "SettingsFragment.TAG";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,10 +36,22 @@ public class SettingsFragment extends PreferenceFragment {
         pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                // TODO:  Delete stored weather data
+                clearData();
 
                 return false;
             }
         });
+    }
+
+    private void clearData(){
+        Log.i(TAG, "clearData entered");
+
+        File external = getActivity().getExternalFilesDir(null);
+        File file = new File(external, MainActivity.FILENAME);
+
+        if (file.delete()) {
+            Log.i(TAG, "Cache was deleted");
+        }
+
     }
 }

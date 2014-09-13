@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.garciaericn.forecaster.data.JSONParser;
 import com.garciaericn.forecaster.data.Weather;
 import com.garciaericn.forecaster.fragments.DaysListFragment;
+import com.garciaericn.forecaster.fragments.SettingsFragment;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -33,7 +34,7 @@ import java.util.List;
 public class MainActivity extends Activity {
 
     public static final String TAG = "MainActivity.TAG";
-    private static final String FILENAME = "SavedWeatherData";
+    public static final String FILENAME = "SavedWeatherData";
 
     private SharedPreferences settings;
     private Context context;
@@ -92,11 +93,13 @@ public class MainActivity extends Activity {
             case R.id.action_settings: {
                 // TODO: Load preferencesFragment
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("Setting fragment would go here.")
-                        .setTitle("Settings")
-                        .create()
-                        .show();
+                SettingsFragment frag = new SettingsFragment();
+
+                // Create FragmentManager and Transaction
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.weather_detail_fragment, frag)
+                        .commit();
 
                 return true;
             }
