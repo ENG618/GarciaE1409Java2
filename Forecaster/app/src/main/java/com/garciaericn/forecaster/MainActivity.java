@@ -52,9 +52,6 @@ public class MainActivity extends Activity {
         context = this;
         settings = PreferenceManager.getDefaultSharedPreferences(this);
 
-        // Check network
-        checkNetworkStatus();
-
         // Obtain refresh preference
         Boolean refresh = settings.getBoolean(REFRESH_WEATHER, true);
 
