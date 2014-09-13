@@ -10,9 +10,9 @@
             android:summary="Clear all stored weather data from device." />
 
         <CheckBoxPreference
-            android:key="LOAD_PREF"
-            android:title="Network Default"
-            android:summary="Load current data when network available"
+            android:key="REFRESH_WEATHER"
+            android:title="Refresh on start"
+            android:summary="Refresh weather data on launch if network available."
             android:defaultValue="true" />
 
     </PreferenceCategory>

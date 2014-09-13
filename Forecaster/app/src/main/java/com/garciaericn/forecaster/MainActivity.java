@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
 
     public static final String TAG = "MainActivity.TAG";
     public static final String FILENAME = "SavedWeatherData";
+    public static final String REFRESH_WEATHER = "REFRESH_WEATHER";
 
     private SharedPreferences settings;
     private Context context;
@@ -53,25 +54,28 @@ public class MainActivity extends Activity {
         // Check network
         checkNetworkStatus();
 
-        // Check if saved data exists...if so load saved data
-        if (checkFile(FILENAME)) {
+        // Obtain refresh preference
+        Boolean refresh = settings.getBoolean(REFRESH_WEATHER, true);
 
-            // Send JSON string to parsing method
-            List<Weather> forecastList = JSONParser.parseForecast(readFromFile(FILENAME));
-
-            // Populate weather list fragment into container
-            DaysListFragment listFragment = DaysListFragment.newInstance(forecastList);
-
-            // Create FragmentManager and Transaction
-            getFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.days_list_fragment, listFragment, DaysListFragment.TAG)
-                    .commit();
-        } else { // Otherwise get new data from api
-            // Call api to get current forecast
+        if (refresh) {
             searchWeatherUnderground();
-        }
+        } else {
+            if (checkFile(FILENAME)) {
+                // Send JSON string to parsing method
+                List<Weather> forecastList = JSONParser.parseForecast(readFromFile(FILENAME));
 
+                // Populate weather list fragment into container
+                DaysListFragment listFragment = DaysListFragment.newInstance(forecastList);
+
+                // Create FragmentManager and Transaction
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.days_list_fragment, listFragment, DaysListFragment.TAG)
+                        .commit();
+            } else {
+                // TODO: Alert user no saved data, must refresh manually
+            }
+        }
     }
 
 
@@ -91,7 +95,6 @@ public class MainActivity extends Activity {
 
         switch (id) {
             case R.id.action_settings: {
-                // TODO: Load preferencesFragment
 
                 SettingsFragment frag = new SettingsFragment();
 

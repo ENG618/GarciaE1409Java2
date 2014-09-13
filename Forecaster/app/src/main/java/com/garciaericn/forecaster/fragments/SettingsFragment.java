@@ -52,6 +52,5 @@ public class SettingsFragment extends PreferenceFragment {
         if (file.delete()) {
             Log.i(TAG, "Cache was deleted");
         }
-
     }
 }
