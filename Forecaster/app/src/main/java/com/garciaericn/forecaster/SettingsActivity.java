@@ -17,9 +17,6 @@ public class SettingsActivity extends PreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate entered");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
-
-
-
+        addPreferencesFromResource(R.xml.settings);
     }
 }

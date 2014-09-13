@@ -3,11 +3,13 @@ package com.garciaericn.forecaster;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,7 +18,6 @@ import android.widget.Toast;
 import com.garciaericn.forecaster.data.JSONParser;
 import com.garciaericn.forecaster.data.Weather;
 import com.garciaericn.forecaster.fragments.DaysListFragment;
-import com.garciaericn.forecaster.fragments.SettingsFragment;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -49,7 +50,8 @@ public class MainActivity extends Activity {
 
         // Cache context & preferences
         context = this;
-        settings = getPreferences(MODE_PRIVATE);
+        settings = PreferenceManager.getDefaultSharedPreferences(this);
+//        settings = getPreferences(MODE_PRIVATE);
 
         // Check network
         checkNetworkStatus();
@@ -100,13 +102,16 @@ public class MainActivity extends Activity {
         switch (id) {
             case R.id.action_settings: {
 
-                SettingsFragment frag = new SettingsFragment();
+//                SettingsFragment frag = new SettingsFragment();
+//
+//                // Create FragmentManager and Transaction
+//                getFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.weather_detail_fragment, frag)
+//                        .commit();
 
-                // Create FragmentManager and Transaction
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.weather_detail_fragment, frag)
-                        .commit();
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
 
                 return true;
             }
