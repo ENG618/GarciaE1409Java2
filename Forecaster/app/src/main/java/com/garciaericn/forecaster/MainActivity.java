@@ -51,7 +51,6 @@ public class MainActivity extends Activity {
         // Cache context & preferences
         context = this;
         settings = PreferenceManager.getDefaultSharedPreferences(this);
-//        settings = getPreferences(MODE_PRIVATE);
 
         // Check network
         checkNetworkStatus();
@@ -101,14 +100,6 @@ public class MainActivity extends Activity {
 
         switch (id) {
             case R.id.action_settings: {
-
-//                SettingsFragment frag = new SettingsFragment();
-//
-//                // Create FragmentManager and Transaction
-//                getFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.weather_detail_fragment, frag)
-//                        .commit();
 
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
