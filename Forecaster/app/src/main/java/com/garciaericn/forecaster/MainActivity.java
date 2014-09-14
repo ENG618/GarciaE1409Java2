@@ -53,33 +53,6 @@ public class MainActivity extends Activity {
         settings = PreferenceManager.getDefaultSharedPreferences(this);
 
         searchWeatherUnderground();
-
-//        // Obtain refresh preference
-//        Boolean refresh = settings.getBoolean(REFRESH_WEATHER, true);
-//
-//        if (refresh) {
-//            searchWeatherUnderground();
-//        } else {
-//            if (checkFile(FILENAME)) {
-//                // Send JSON string to parsing method
-//                List<Weather> forecastList = JSONParser.parseForecast(readFromFile(FILENAME));
-//
-//                // Populate weather list fragment into container
-//                DaysListFragment listFragment = DaysListFragment.newInstance(forecastList);
-//
-//                // Create FragmentManager and Transaction
-//                getFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.days_list_fragment, listFragment, DaysListFragment.TAG)
-//                        .commit();
-//            } else {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//                builder.setMessage("There is no saved weather data at this time.  You must manually refresh data")
-//                        .setTitle("No saved data")
-//                        .create()
-//                        .show();
-//            }
-//        }
     }
 
 
@@ -251,14 +224,6 @@ public class MainActivity extends Activity {
                 }
             }
         }
-
-//        // Check if connected to internet
-//        if (checkNetworkStatus()){
-//
-//            // Preform search
-//            getData data = new getData();
-//            data.execute(getForecastURL());
-//        }
     }
 
     // Fetch URL

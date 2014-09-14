@@ -19,11 +19,12 @@ public class SettingsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate entered");
         super.onCreate(savedInstanceState);
-//        addPreferencesFromResource(R.xml.settings);
         setContentView(R.layout.activity_settings);
 
+        // Create instance of preferences fragment
         SettingsFragment frag = new SettingsFragment();
 
+        // Replace fragment container with preferences fragment
         getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.setting_fragment_container, frag, SettingsActivity.TAG)
