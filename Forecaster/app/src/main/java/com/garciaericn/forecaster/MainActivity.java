@@ -52,32 +52,34 @@ public class MainActivity extends Activity {
         context = this;
         settings = PreferenceManager.getDefaultSharedPreferences(this);
 
-        // Obtain refresh preference
-        Boolean refresh = settings.getBoolean(REFRESH_WEATHER, true);
+        searchWeatherUnderground();
 
-        if (refresh) {
-            searchWeatherUnderground();
-        } else {
-            if (checkFile(FILENAME)) {
-                // Send JSON string to parsing method
-                List<Weather> forecastList = JSONParser.parseForecast(readFromFile(FILENAME));
-
-                // Populate weather list fragment into container
-                DaysListFragment listFragment = DaysListFragment.newInstance(forecastList);
-
-                // Create FragmentManager and Transaction
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.days_list_fragment, listFragment, DaysListFragment.TAG)
-                        .commit();
-            } else {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("There is no saved weather data at this time.  You must manually refresh data")
-                        .setTitle("No saved data")
-                        .create()
-                        .show();
-            }
-        }
+//        // Obtain refresh preference
+//        Boolean refresh = settings.getBoolean(REFRESH_WEATHER, true);
+//
+//        if (refresh) {
+//            searchWeatherUnderground();
+//        } else {
+//            if (checkFile(FILENAME)) {
+//                // Send JSON string to parsing method
+//                List<Weather> forecastList = JSONParser.parseForecast(readFromFile(FILENAME));
+//
+//                // Populate weather list fragment into container
+//                DaysListFragment listFragment = DaysListFragment.newInstance(forecastList);
+//
+//                // Create FragmentManager and Transaction
+//                getFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.days_list_fragment, listFragment, DaysListFragment.TAG)
+//                        .commit();
+//            } else {
+//                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//                builder.setMessage("There is no saved weather data at this time.  You must manually refresh data")
+//                        .setTitle("No saved data")
+//                        .create()
+//                        .show();
+//            }
+//        }
     }
 
 
@@ -209,13 +211,54 @@ public class MainActivity extends Activity {
     public void searchWeatherUnderground(){
         Log.i(TAG, "searchWeatherUnderground Entered");
 
-        // Check if connected to internet
-        if (checkNetworkStatus()){
+        // Obtain refresh preference
+        Boolean refresh = settings.getBoolean(REFRESH_WEATHER, true);
 
-            // Preform search
-            getData data = new getData();
-            data.execute(getForecastURL());
+        if (refresh) {
+            // Check if connected to internet
+            if (checkNetworkStatus()){
+
+                // Preform search
+                getData data = new getData();
+                data.execute(getForecastURL());
+            }
+        } else {
+            if (checkFile(FILENAME)) {
+                // Send JSON string to parsing method
+                List<Weather> forecastList = JSONParser.parseForecast(readFromFile(FILENAME));
+
+                // Populate weather list fragment into container
+                DaysListFragment listFragment = DaysListFragment.newInstance(forecastList);
+
+                // Create FragmentManager and Transaction
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.days_list_fragment, listFragment, DaysListFragment.TAG)
+                        .commit();
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("There is no saved weather data, we will now pull fresh data from the web")
+                        .setTitle("No saved data")
+                        .create()
+                        .show();
+
+                // Check if connected to internet
+                if (checkNetworkStatus()){
+
+                    // Preform search
+                    getData data = new getData();
+                    data.execute(getForecastURL());
+                }
+            }
         }
+
+//        // Check if connected to internet
+//        if (checkNetworkStatus()){
+//
+//            // Preform search
+//            getData data = new getData();
+//            data.execute(getForecastURL());
+//        }
     }
 
     // Fetch URL
