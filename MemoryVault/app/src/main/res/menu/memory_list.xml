@@ -1,6 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MemoryListActivity" >
+
+    <item android:id="@+id/action_add_memory"
+        android:title="@string/actions_add_memory"
+        android:icon="@drawable/ic_action_new"
+        android:showAsAction="collapseActionView|ifRoom" />
+
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"

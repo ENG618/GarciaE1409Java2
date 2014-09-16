@@ -40,8 +40,15 @@ public class MemoryListActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+
+        switch (id) {
+            case R.id.action_settings : {
+                // TODO: launch preferences fragment
+                return true;
+            }
+            case R.id.action_add_memory : {
+                // TODO: launch add activity/fragment
+            }
         }
         return super.onOptionsItemSelected(item);
     }
