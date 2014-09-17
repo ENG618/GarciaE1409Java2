@@ -14,11 +14,19 @@ import com.garciaericn.memoryvault.data.Memory;
 import com.garciaericn.memoryvault.fragments.MemoryListFragment;
 import com.garciaericn.memoryvault.fragments.SettingsFragment;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Date;
 
 public class MemoryListActivity extends Activity {
 
     public static final String TAG = "MemoryListActivity.TAG";
+    public static final String FILENAME = "SavedMemories";
 
     private Context context;
     private SharedPreferences settings;
@@ -72,6 +80,67 @@ public class MemoryListActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    private Boolean checkFile (String fileName) {
+        Log.i(TAG, "checkFile entered");
+        // Store data in "protected" directory
+        File external = context.getExternalFilesDir(null);
+        File file = new File(external, fileName);
+        return file.exists();
+    }
+
+    private void writeToFile(Context context, String fileName, String data) {
+        Log.i(TAG, "writeToFile entered");
+        // TODO: Save Data to protected storage
+//        // Store data in "protected" directory
+//        File external = context.getExternalFilesDir(null);
+//        File file = new File(external, fileName);
+//
+//        try {
+//            //Create new output stream
+//            FileOutputStream fos = new FileOutputStream(file);
+//            // Convert string to byte and write to stream
+//            fos.write(data.getBytes());
+//            // Close the stream to sve the file
+//            fos.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+    }
+
+    private String readFromFile(String fileName) {
+        Log.i(TAG, "readFromFile entered");
+        // TODO: Read data from saved file
+
+//        String savedWeatherString = null;
+//
+//        File external = getExternalFilesDir(null);
+//        File file = new File(external, fileName);
+//
+//        try {
+//            FileInputStream fis = new FileInputStream(file);
+//            // Create stream readers
+//            InputStreamReader inReader = new InputStreamReader(fis);
+//            BufferedReader reader = new BufferedReader(inReader);
+//
+//            // Read data and pass to StringBuffer
+//            StringBuilder buffer = new StringBuilder();
+//            String text;
+//            // Make sure a line of text is available to be read
+//            while ((text = reader.readLine()) != null) {
+//                buffer.append(text);
+//            }
+//            Log.i(TAG, "String from file: " + buffer.toString());
+//
+//            savedWeatherString = buffer.toString();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return savedWeatherString;
+        return null;
+    }
+
     private void checkFirstLaunch() {
         Log.i(TAG, "checkFirstLaunch entered");
 
@@ -99,6 +168,6 @@ public class MemoryListActivity extends Activity {
         Memory mem3 = new Memory("Birthday", 25, "Party house", "HAPPY BIRTHDAY!!");
         Memory mem4 = new Memory("Anniversary", 2, "Romantic restaurant", "Always fun spending time with my wife");
 
-
+        // TODO: Add to hashMap, and save to file
     }
 }
