@@ -3,6 +3,7 @@ package com.garciaericn.memoryvault.data;
 import android.os.Bundle;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Full Sail University
@@ -23,6 +24,7 @@ public class Memory implements Serializable {
     private int numGuests;
     private String eventLocation;
     private String eventNotes;
+    private long key;
 
     // Construct memory object
     public Memory(String name, int guests, String location, String notes) {
@@ -30,6 +32,7 @@ public class Memory implements Serializable {
         this.numGuests = guests;
         this.eventLocation = location;
         this.eventNotes = notes;
+        this.key = System.currentTimeMillis();
     }
 
     // Getter and Setter methods
@@ -64,6 +67,14 @@ public class Memory implements Serializable {
 
     public void setEventNotes(String eventNotes) {
         this.eventNotes = eventNotes;
+    }
+
+    public long getKey() {
+        return key;
+    }
+
+    public void setKey(long key) {
+        this.key = key;
     }
 
     // Bundle memory object

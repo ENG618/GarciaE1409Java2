@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".NewMemoryActivity"
+            android:parentActivityName=".MemoryListActivity" />
+        <activity android:name=".SettingsActivity"
+            android:parentActivityName=".MemoryListActivity" />
     </application>
 
 </manifest>
