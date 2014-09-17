@@ -2,6 +2,8 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="@android:color/holo_green_dark"
+    android:padding="2dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -9,29 +11,35 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/list_item_title"
         android:id="@+id/list_item_title" />
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:paddingBottom="5dp"
         android:layout_gravity="center_horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/textView2" />
+            android:paddingLeft="10dp"
+            android:text="@string/list_item_location"
+            android:id="@+id/list_item_location" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/textView3" />
+            android:paddingRight="10dp"
+            android:layout_alignParentRight="true"
+            android:text="@string/list_item_guest_count"
+            android:id="@+id/list_item_guest_count" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
 </LinearLayout>
