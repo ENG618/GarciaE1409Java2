@@ -7,5 +7,6 @@
     <string name="list_item_title">Memory Name</string>
     <string name="list_item_location">Location</string>
     <string name="list_item_guest_count">Guest count</string>
+    <string name="action_save_memory">Save Memory</string>
 
 </resources>

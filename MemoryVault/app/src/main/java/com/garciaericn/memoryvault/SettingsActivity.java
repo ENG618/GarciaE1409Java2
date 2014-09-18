@@ -13,7 +13,7 @@ import com.garciaericn.memoryvault.fragments.SettingsFragment;
  */
 public class SettingsActivity extends Activity {
 
-    private static final String TAG = "SettingsActivity";
+    private static final String TAG = "SettingsActivity.TAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

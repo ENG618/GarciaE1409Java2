@@ -28,6 +28,7 @@ public class MemoryListActivity extends Activity {
 
     public static final String TAG = "MemoryListActivity.TAG";
     public static final String FILENAME = "SavedMemories";
+    private static final int NEW_MEM_CODE = 1234;
 
     private Context context;
     private SharedPreferences settings;
@@ -78,6 +79,8 @@ public class MemoryListActivity extends Activity {
             }
             case R.id.action_add_memory : {
                 // TODO: launch add activity/fragment
+                Intent intent = new Intent(this, NewMemoryActivity.class);
+                startActivityForResult(intent, NEW_MEM_CODE);
             }
         }
         return super.onOptionsItemSelected(item);
@@ -165,16 +168,9 @@ public class MemoryListActivity extends Activity {
     private void loadDummyMemories() {
         Log.i(TAG, "loadDummyMemories entered");
 
-        // Load dummy data
-        Memory mem1 = new Memory("Project 3", 1, "Home", "Coming along pretty good so far");
-        Memory mem2 = new Memory("Family Vacation", 4, "Ruskin, FL", "Had some well deserved quality time with the family");
-        Memory mem3 = new Memory("Birthday", 25, "Party house", "HAPPY BIRTHDAY!!");
-        Memory mem4 = new Memory("Anniversary", 2, "Romantic restaurant", "Always fun spending time with my wife");
-
-        // Add dummy data to Manager
-        manager.addMemory(mem1);
-        manager.addMemory(mem2);
-        manager.addMemory(mem3);
-        manager.addMemory(mem4);
+        manager.addMemory(new Memory("Project 3", 1, "Home", "Coming along pretty good so far"));
+        manager.addMemory(new Memory("Family Vacation", 4, "Ruskin, FL", "Had some well deserved quality time with the family"));
+        manager.addMemory(new Memory("Birthday", 25, "Party house", "HAPPY BIRTHDAY!!"));
+        manager.addMemory(new Memory("Anniversary", 2, "Romantic restaurant", "Always fun spending time with my wife"));
     }
 }
