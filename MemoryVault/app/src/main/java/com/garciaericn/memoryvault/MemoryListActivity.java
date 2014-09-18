@@ -31,6 +31,7 @@ public class MemoryListActivity extends Activity {
 
     private Context context;
     private SharedPreferences settings;
+    private MemoryManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +39,10 @@ public class MemoryListActivity extends Activity {
         Log.i(TAG, "onCreate entered");
         setContentView(R.layout.activity_memory_list);
 
-        // Cache context & preferences
+        // Cache context, preferences, & manager
         context = this;
         settings = PreferenceManager.getDefaultSharedPreferences(this);
+        manager = new MemoryManager();
 
         // Check if first launch
         checkFirstLaunch();
@@ -169,12 +171,10 @@ public class MemoryListActivity extends Activity {
         Memory mem3 = new Memory("Birthday", 25, "Party house", "HAPPY BIRTHDAY!!");
         Memory mem4 = new Memory("Anniversary", 2, "Romantic restaurant", "Always fun spending time with my wife");
 
-        // TODO: Add to hashMap, and save to file
-        // Create instance of MemoryManager
-        MemoryManager mgr = new MemoryManager();
-        mgr.addMemory(mem1);
-        mgr.addMemory(mem2);
-        mgr.addMemory(mem3);
-        mgr.addMemory(mem4);
+        // Add dummy data to Manager
+        manager.addMemory(mem1);
+        manager.addMemory(mem2);
+        manager.addMemory(mem3);
+        manager.addMemory(mem4);
     }
 }
