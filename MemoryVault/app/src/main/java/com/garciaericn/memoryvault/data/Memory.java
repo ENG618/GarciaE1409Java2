@@ -3,7 +3,6 @@ package com.garciaericn.memoryvault.data;
 import android.os.Bundle;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Full Sail University
@@ -18,13 +17,14 @@ public class Memory implements Serializable {
     public static final String NUM_GUESTS = "com.garciaericn.memoryvault.NUMGUESTS";
     public static final String EVENT_LOCATION = "com.garciaericn.memoryvault.EVENTLOCATION";
     public static final String EVENT_NOTES = "com.garciaericn.memoryvault.NOTES";
+    public static final String EVENT_KEY = "com.garciaericn.memoryvault.KEY";
 
     // Privet fields
     private String eventName;
     private int numGuests;
     private String eventLocation;
     private String eventNotes;
-    private long key;
+    private long memoryKey;
 
     // Construct memory object
     public Memory(String name, int guests, String location, String notes) {
@@ -32,7 +32,7 @@ public class Memory implements Serializable {
         this.numGuests = guests;
         this.eventLocation = location;
         this.eventNotes = notes;
-        this.key = System.currentTimeMillis();
+        this.memoryKey = System.currentTimeMillis();
     }
 
     // Getter and Setter methods
@@ -69,12 +69,12 @@ public class Memory implements Serializable {
         this.eventNotes = eventNotes;
     }
 
-    public long getKey() {
-        return key;
+    public long getMemoryKey() {
+        return memoryKey;
     }
 
-    public void setKey(long key) {
-        this.key = key;
+    public void setMemoryKey(long memoryKey) {
+        this.memoryKey = memoryKey;
     }
 
     // Bundle memory object
@@ -84,6 +84,7 @@ public class Memory implements Serializable {
         b.putInt(NUM_GUESTS, this.numGuests);
         b.putString(EVENT_LOCATION, this.eventLocation);
         b.putString(EVENT_NOTES, this.eventNotes);
+        b.putLong(EVENT_KEY, this.memoryKey);
         return b;
     }
 
@@ -94,6 +95,7 @@ public class Memory implements Serializable {
             this.numGuests = b.getInt(NUM_GUESTS);
             this.eventLocation= b.getString(EVENT_LOCATION);
             this.eventNotes = b.getString(EVENT_NOTES);
+            this.memoryKey = b.getLong(EVENT_KEY);
         }
     }
 }

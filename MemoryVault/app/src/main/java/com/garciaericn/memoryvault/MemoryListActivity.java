@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.garciaericn.memoryvault.data.Memory;
+import com.garciaericn.memoryvault.data.MemoryManager;
 import com.garciaericn.memoryvault.fragments.MemoryListFragment;
 import com.garciaericn.memoryvault.fragments.SettingsFragment;
 
@@ -169,5 +170,11 @@ public class MemoryListActivity extends Activity {
         Memory mem4 = new Memory("Anniversary", 2, "Romantic restaurant", "Always fun spending time with my wife");
 
         // TODO: Add to hashMap, and save to file
+        // Create instance of MemoryManager
+        MemoryManager mgr = new MemoryManager();
+        mgr.addMemory(mem1);
+        mgr.addMemory(mem2);
+        mgr.addMemory(mem3);
+        mgr.addMemory(mem4);
     }
 }
