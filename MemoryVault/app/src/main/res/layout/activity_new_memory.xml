@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/add_fragment_container"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true"
+    tools:context=".NewMemoryFragment"
+    tools:layout="@layout/fragment_new_memory" >
 
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.garciaericn.memoryvault.fragments.NewMemoryFragment"
-        tools:layout="@layout/fragment_new_memory" />
+</FrameLayout>
+
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--<fragment-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:name="com.garciaericn.memoryvault.fragments.NewMemoryFragment"-->
+    <!--tools:layout="@layout/fragment_new_memory" />-->
 
 
-</LinearLayout>
+    <!--</LinearLayout>-->

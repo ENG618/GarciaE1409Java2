@@ -8,5 +8,14 @@
     <string name="list_item_location">Location</string>
     <string name="list_item_guest_count">Guest count</string>
     <string name="action_save_memory">Save Memory</string>
+    <string name="label_location_hint">Event Location</string>
+    <string name="label_location">Location:</string>
+    <string name="label_notes">Notes:</string>
+    <string name="label_notes_hint">Enter notes here...</string>
+    <string name="label_new_event">New Event</string>
+    <string name="label_event_name">Event Name:</string>
+    <string name="label_event_name_hint">Event Name</string>
+    <string name="label_num_guests">Guests:</string>
+    <string name="label_num_guests_hint">Number of Guests</string>
 
 </resources>

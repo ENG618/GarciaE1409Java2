@@ -29,6 +29,7 @@ public class MemoryListActivity extends Activity {
     public static final String TAG = "MemoryListActivity.TAG";
     public static final String FILENAME = "SavedMemories";
     private static final int NEW_MEM_CODE = 1234;
+    public static final String MEMORYBUNDLE = "com.garciaericn.memoryvault.MEMORYBUNDLE";
 
     private Context context;
     private SharedPreferences settings;
@@ -81,6 +82,7 @@ public class MemoryListActivity extends Activity {
                 // TODO: launch add activity/fragment
                 Intent intent = new Intent(this, NewMemoryActivity.class);
                 startActivityForResult(intent, NEW_MEM_CODE);
+                return true;
             }
         }
         return super.onOptionsItemSelected(item);

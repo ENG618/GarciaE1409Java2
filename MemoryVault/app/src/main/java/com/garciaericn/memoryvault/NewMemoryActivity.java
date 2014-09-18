@@ -2,9 +2,12 @@ package com.garciaericn.memoryvault;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.garciaericn.memoryvault.fragments.NewMemoryFragment;
 
 /**
  * Full Sail University
@@ -14,6 +17,31 @@ import android.view.MenuItem;
 public class NewMemoryActivity extends Activity {
 
     private static final String TAG = "NewMemoryActivity.TAG";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_new_memory);
+
+        if (savedInstanceState == null) { // First launch of activity (no saved state)
+            Log.i(TAG, "onCreate for first launch");
+
+            // Create fragment
+            NewMemoryFragment frag = new NewMemoryFragment();
+            // Obtain bundle from intent
+            Bundle b = getIntent().getBundleExtra(MemoryListActivity.MEMORYBUNDLE);
+            frag.setArguments(b);
+
+            // Load new fragment
+            getFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.add_fragment_container, frag)
+                    .commit();
+        } else { // Application recreated from saved state
+            Log.i(TAG, "onCreate from saved instance");
+            // TODO: Load fragments from savedInstanceState Bundle
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
