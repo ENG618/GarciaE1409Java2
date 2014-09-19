@@ -2,10 +2,20 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/action_save_memory"
-        android:title="@string/action_save_memory"
-        android:icon="@drawable/ic_action_save"
+    <item android:id="@+id/action_share_memory"
+        android:title="@string/action_share"
+        android:icon="@drawable/ic_action_share"
         android:showAsAction="collapseActionView|ifRoom" />
+
+    <item android:id="@+id/action_discard_memory"
+        android:title="@string/action_discard"
+        android:icon="@drawable/ic_action_discard"
+        android:showAsAction="collapseActionView|ifRoom"/>
+
+    <item android:id="@+id/action_edit_memory"
+        android:title="@string/action_edit"
+        android:icon="@drawable/ic_action_edit"
+        android:showAsAction="collapseActionView|ifRoom"/>
 
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"

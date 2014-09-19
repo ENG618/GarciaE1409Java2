@@ -17,5 +17,8 @@
     <string name="label_event_name_hint">Event Name</string>
     <string name="label_num_guests">Guests:</string>
     <string name="label_num_guests_hint">Number of Guests</string>
+    <string name="action_share">Share</string>
+    <string name="action_discard">Discard</string>
+    <string name="action_edit">Edit</string>
 
 </resources>
