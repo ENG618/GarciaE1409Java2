@@ -183,14 +183,16 @@ public class MemoryListActivity extends Activity {
         manager.addMemory(new Memory("Family Vacation", 4, "Ruskin, FL", "Had some well deserved quality time with the family"));
         manager.addMemory(new Memory("Birthday", 25, "Party house", "HAPPY BIRTHDAY!!"));
         manager.addMemory(new Memory("Anniversary", 2, "Romantic restaurant", "Always fun spending time with my wife"));manager.addMemory(new Memory("Project 3", 1, "Home", "Coming along pretty good so far"));
-        manager.addMemory(new Memory("Family Vacation", 4, "Ruskin, FL", "Had some well deserved quality time with the family"));
-        manager.addMemory(new Memory("Birthday", 25, "Party house", "HAPPY BIRTHDAY!!"));
-        manager.addMemory(new Memory("Anniversary", 2, "Romantic restaurant", "Always fun spending time with my wife"));manager.addMemory(new Memory("Project 3", 1, "Home", "Coming along pretty good so far"));
-        manager.addMemory(new Memory("Family Vacation", 4, "Ruskin, FL", "Had some well deserved quality time with the family"));
-        manager.addMemory(new Memory("Birthday", 25, "Party house", "HAPPY BIRTHDAY!!"));
-        manager.addMemory(new Memory("Anniversary", 2, "Romantic restaurant", "Always fun spending time with my wife"));manager.addMemory(new Memory("Project 3", 1, "Home", "Coming along pretty good so far"));
-        manager.addMemory(new Memory("Family Vacation", 4, "Ruskin, FL", "Had some well deserved quality time with the family"));
-        manager.addMemory(new Memory("Birthday", 25, "Party house", "HAPPY BIRTHDAY!!"));
-        manager.addMemory(new Memory("Anniversary", 2, "Romantic restaurant", "Always fun spending time with my wife"));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == NEW_MEM_CODE && resultCode == RESULT_OK) {
+            Bundle result = data.getExtras();
+            Memory newMemory = new Memory(result);
+
+            manager.addMemory(newMemory);
+        }
     }
 }
