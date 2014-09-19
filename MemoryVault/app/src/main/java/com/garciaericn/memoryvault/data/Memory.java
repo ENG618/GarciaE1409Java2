@@ -3,6 +3,9 @@ package com.garciaericn.memoryvault.data;
 import android.os.Bundle;
 
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.security.SecureRandom;
+import java.util.Random;
 
 /**
  * Full Sail University
@@ -24,7 +27,7 @@ public class Memory implements Serializable {
     private int numGuests;
     private String eventLocation;
     private String eventNotes;
-    private long memoryKey;
+    private String memoryKey;
 
     // Construct memory object
     public Memory(String name, int guests, String location, String notes) {
@@ -32,7 +35,15 @@ public class Memory implements Serializable {
         this.numGuests = guests;
         this.eventLocation = location;
         this.eventNotes = notes;
-        this.memoryKey = System.currentTimeMillis();
+
+//        long longKey = System.currentTimeMillis();
+        this.memoryKey = generateKey();
+    }
+
+    private String generateKey() {
+        SecureRandom random = new SecureRandom();
+
+        return new BigInteger(130, random).toString(32);
     }
 
     // Getter and Setter methods
@@ -69,11 +80,11 @@ public class Memory implements Serializable {
         this.eventNotes = eventNotes;
     }
 
-    public long getMemoryKey() {
+    public String getMemoryKey() {
         return memoryKey;
     }
 
-    public void setMemoryKey(long memoryKey) {
+    public void setMemoryKey(String memoryKey) {
         this.memoryKey = memoryKey;
     }
 
@@ -84,7 +95,7 @@ public class Memory implements Serializable {
         b.putInt(NUM_GUESTS, this.numGuests);
         b.putString(EVENT_LOCATION, this.eventLocation);
         b.putString(EVENT_NOTES, this.eventNotes);
-        b.putLong(EVENT_KEY, this.memoryKey);
+        b.putString(EVENT_KEY, this.memoryKey);
         return b;
     }
 
@@ -95,7 +106,7 @@ public class Memory implements Serializable {
             this.numGuests = b.getInt(NUM_GUESTS);
             this.eventLocation= b.getString(EVENT_LOCATION);
             this.eventNotes = b.getString(EVENT_NOTES);
-            this.memoryKey = b.getLong(EVENT_KEY);
+            this.memoryKey = b.getString(EVENT_KEY);
         }
     }
 }

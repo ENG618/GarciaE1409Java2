@@ -14,17 +14,25 @@ import java.util.HashMap;
 public class MemoryManager {
 
     private static final String TAG = "MemoryManager.TAG";
-    public HashMap <Long, Memory> memories;
+    public HashMap <String, Memory> memories;
 
     // Initializes memories HashMap if null
     public MemoryManager() {
         Log.i(TAG, "MemoryManager Created");
         if (memories == null) {
-            memories = new HashMap<Long, Memory>();
+            memories = new HashMap<String, Memory>();
         }
     }
 
-    // Adds given memeory
+    public HashMap<String, Memory> getMemories() {
+        return memories;
+    }
+
+    public Memory getMemory(String key) {
+        return memories.get(key);
+    }
+
+    // Adds given memory
     public void addMemory(Memory memory) {
         Log.i(TAG, "addMemory entered");
         memories.put(memory.getMemoryKey(), memory);

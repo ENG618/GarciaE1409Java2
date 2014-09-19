@@ -22,7 +22,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 public class MemoryListActivity extends Activity {
 
@@ -49,12 +52,22 @@ public class MemoryListActivity extends Activity {
         // Check if first launch
         checkFirstLaunch();
 
+        // TODO: remove redundant load dummy data call once save is implemented
+        loadDummyMemories();
+
+        // Obtain HasMap of memories from manager
+        HashMap map = manager.getMemories();
+
+        // Create
+        List<Memory> memoryList = new ArrayList<Memory>(map.values());
+
         // Create instance of Memory list fragment
-        MemoryListFragment frag = new MemoryListFragment();
+        MemoryListFragment frag = MemoryListFragment.newInstance(memoryList);
 
         getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.memory_list_fragment_container, frag, MemoryListFragment.TAG);
+                .replace(R.id.memory_list_fragment_container, frag, MemoryListFragment.TAG)
+                .commit();
     }
 
 
