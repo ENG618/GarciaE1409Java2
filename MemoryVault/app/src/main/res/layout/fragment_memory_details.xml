@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/label_event_name_hint"
                 android:layout_weight="4"
-                android:id="@+id/newEventNameTV"
+                android:id="@+id/eventNameTV"
                 android:paddingLeft="5dp" />
         </TableRow>
 
@@ -49,7 +49,7 @@
                 android:hint="@string/label_num_guests_hint"
                 android:inputType="number"
                 android:ems="10"
-                android:id="@+id/newGuestsTV"
+                android:id="@+id/guestsTV"
                 android:paddingLeft="5dp" />
         </TableRow>
 
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:hint="@string/label_location_hint"
-                android:id="@+id/newLocationTV"
+                android:id="@+id/locationTV"
                 android:paddingLeft="5dp" />
         </TableRow>
 
@@ -82,7 +82,7 @@
                 android:layout_weight="4"
                 android:hint="@string/label_notes_hint"
                 android:ems="10"
-                android:id="@+id/newNotesTV"
+                android:id="@+id/notesTV"
                 android:paddingLeft="5dp" />
         </TableRow>
 
