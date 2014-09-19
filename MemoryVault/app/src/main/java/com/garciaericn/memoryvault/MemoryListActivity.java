@@ -48,19 +48,7 @@ public class MemoryListActivity extends Activity {
         // TODO: remove redundant load dummy data call once save is implemented
         loadDummyMemories();
 
-        // Obtain HasMap of memories from manager
-        HashMap map = manager.getMemories();
-
-        // Create
-        List<Memory> memoryList = new ArrayList<Memory>(map.values());
-
-        // Create instance of Memory list fragment
-        MemoryListFragment frag = MemoryListFragment.newInstance(memoryList);
-
-        getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.memory_list_fragment_container, frag, MemoryListFragment.TAG)
-                .commit();
+        loadList();
     }
 
 
@@ -152,6 +140,22 @@ public class MemoryListActivity extends Activity {
 //        }
 //        return savedWeatherString;
         return null;
+    }
+
+    private void loadList(){
+        // Obtain HasMap of memories from manager
+        HashMap map = manager.getMemories();
+
+        // Create
+        List<Memory> memoryList = new ArrayList<Memory>(map.values());
+
+        // Create instance of Memory list fragment
+        MemoryListFragment frag = MemoryListFragment.newInstance(memoryList);
+
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.memory_list_fragment_container, frag, MemoryListFragment.TAG)
+                .commit();
     }
 
     private void checkFirstLaunch() {
