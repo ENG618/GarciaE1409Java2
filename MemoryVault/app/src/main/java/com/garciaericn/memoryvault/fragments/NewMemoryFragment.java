@@ -1,6 +1,7 @@
 package com.garciaericn.memoryvault.fragments;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -73,26 +74,49 @@ public class NewMemoryFragment extends Fragment {
 
         View view = getView();
         Memory newMemory;
+        int numGuests = 0;
 
         if (view != null) {
             // Obtain all fields
             TextView eventTitleTV = (TextView) view.findViewById(R.id.newEventNameTV);
             String eventTitle = (String) eventTitleTV.getText();
+            if (eventTitle == null) {
+                alertDialog("Please enter and event title");
+            }
 
             TextView numGuestsTV = (TextView) view.findViewById(R.id.newGuestsTV);
-            int numGuests = Integer.valueOf((String) numGuestsTV.getText());
+            String stringGuests = (String) numGuestsTV.getText();
+            if (stringGuests == null) {
+                alertDialog("Please enter how many people were included");
+            } else {
+            numGuests = Integer.valueOf(stringGuests);
+            }
 
             TextView eventLocationTV = (TextView) view.findViewById(R.id.newLocationTV);
             String eventLocation = (String) eventLocationTV.getText();
+            if (eventLocation == null) {
+                alertDialog("Please enter a location");
+            }
 
             TextView eventNotesTV = (TextView) view.findViewById(R.id.newNotesTV);
             String eventNotes = (String) eventNotesTV.getText();
 
-            newMemory = new Memory(eventTitle, numGuests, eventLocation, eventNotes);
 
-            activity.addMemory(newMemory);
+            if (eventTitle != null && stringGuests != null && eventLocation != null) {
+                newMemory = new Memory(eventTitle, numGuests, eventLocation, eventNotes);
+
+                activity.addMemory(newMemory);
+            }
         } else {
-            // TODO: Display error alert
+            alertDialog("Please bare with me as I work to fix the issue");
         }
+    }
+
+    public void alertDialog (String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Something isn't right...")
+                .setMessage(message)
+                .create()
+                .show();
     }
 }
