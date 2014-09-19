@@ -18,8 +18,9 @@
         </activity>
         <activity android:name=".NewMemoryActivity"
             android:parentActivityName=".MemoryListActivity" />
-        <activity android:name=".SettingsActivity"
-            android:parentActivityName=".MemoryListActivity" />
+        <activity android:name=".MemoryDetailsActivity"
+            android:parentActivityName=".MemoryListActivity"/>
+        <activity android:name=".SettingsActivity" />
     </application>
 
 </manifest>
