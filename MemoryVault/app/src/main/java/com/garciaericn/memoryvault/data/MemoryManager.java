@@ -4,6 +4,10 @@ import android.content.Context;
 import android.util.Log;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 /**
@@ -14,6 +18,7 @@ import java.util.HashMap;
 public class MemoryManager {
 
     private static final String TAG = "MemoryManager.TAG";
+    private static final String FILENAME = "Memories";
     private Context context;
 
     public HashMap <String, Memory> memories;
@@ -26,6 +31,8 @@ public class MemoryManager {
 
     public MemoryManager newInstance(Context context) {
         Log.i(TAG, "newInstance entered");
+
+        //TODO: Check is disk has stored data.
 
         MemoryManager mgr = new MemoryManager();
         if (memories == null) {
@@ -47,7 +54,7 @@ public class MemoryManager {
     public void addMemory(Memory memory) {
         Log.i(TAG, "addMemory entered");
         memories.put(memory.getMemoryKey(), memory);
-
+        writeToDisk(memories);
     }
 
     // Removes a given memory
@@ -65,23 +72,22 @@ public class MemoryManager {
         return file.exists();
     }
 
-    public void writeToDisk(Context context, HashMap<String, Memory> memories) {
+    public void writeToDisk(HashMap<String, Memory> memories) {
         Log.i(TAG, "writeToDisk entered");
-        // TODO: Add save code
-//        // Store data in "protected" directory
-//        File external = context.getExternalFilesDir(null);
-//        File file = new File(external, fileName);
-//
-//        try {
-//            //Create new output stream
-//            FileOutputStream fos = new FileOutputStream(file);
-//            // Convert string to byte and write to stream
-//            fos.write(data.getBytes());
-//            // Close the stream to sve the file
-//            fos.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+
+        File external = context.getExternalFilesDir(null);
+        File file = new File(external, FILENAME);
+            try {
+                FileOutputStream fileOutputStream = new FileOutputStream(file);
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+
+                objectOutputStream.writeObject(memories);
+                objectOutputStream.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 
     private String readFromDisk(String fileName) {
