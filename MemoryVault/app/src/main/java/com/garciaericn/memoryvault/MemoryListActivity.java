@@ -19,7 +19,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MemoryListActivity extends Activity {
+public class MemoryListActivity extends Activity
+    implements MemoryListFragment.MemoryListFragmentCallback{
 
     public static final String TAG = "MemoryListActivity.TAG";
     private static final int NEW_MEM_CODE = 1234;
@@ -129,5 +130,12 @@ public class MemoryListActivity extends Activity {
 
             manager.addMemory(newMemory);
         }
+    }
+
+    @Override
+    public void onItemSelected(Memory memory) {
+
+        Bundle b = memory.toBundle();
+//        Intent intent = new Intent(this, )
     }
 }

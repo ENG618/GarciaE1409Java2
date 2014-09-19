@@ -1,5 +1,6 @@
 package com.garciaericn.memoryvault.fragments;
 
+import android.app.Activity;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,11 @@ import java.util.List;
 public class MemoryListFragment extends ListFragment {
     public static final String TAG = "MemoryListFragment.TAG";
     private static List<Memory> memoryList;
+    private MemoryListFragmentCallback activity;
+
+    public interface MemoryListFragmentCallback {
+        public void onItemSelected(Memory memory);
+    }
 
     public MemoryListFragment() {
 
@@ -47,10 +53,15 @@ public class MemoryListFragment extends ListFragment {
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = (MemoryListFragmentCallback) activity;
+    }
+
+    @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Log.i(TAG, "onListItemClick entered");
         Memory memory = memoryList.get(position);
-
-
+        activity.onItemSelected(memory);
     }
 }

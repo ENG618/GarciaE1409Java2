@@ -64,10 +64,14 @@ public class NewMemoryActivity extends Activity {
                 startActivity(intent);
                 return true;
             }
-            case R.id.action_save_memory : {
-                Log.i(TAG, "Save button pressed");
-                // TODO: Save Memory
-            }
+            /**
+             * Save is handled in fragment class
+             * case R.id.action_save_memory : {
+             *  Log.i(TAG, "Save button pressed");
+             *  return false;
+             * }
+             */
+            //
         }
         return super.onOptionsItemSelected(item);
     }
