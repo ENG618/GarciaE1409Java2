@@ -1,7 +1,10 @@
 package com.garciaericn.memoryvault;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.garciaericn.memoryvault.fragments.MemoryDetailsFragment;
 
@@ -33,6 +36,33 @@ public class MemoryDetailsActivity extends Activity {
         } else {
             // TODO: Load from savedInstanceState
         }
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.memory_details, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_share_memory : {
+                // TODO: Share memory
+                return true;
+            }
+            case R.id.action_discard_memory : {
+                // TODO: Delete memory
+            }
+            case R.id.action_edit_memory : {
+                // TODO: Edit memory
+            }
+            case R.id.action_settings : {
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
