@@ -25,6 +25,7 @@ public class MemoryListActivity extends Activity
     public static final String TAG = "MemoryListActivity.TAG";
     private static final int NEW_MEM_CODE = 1234;
     public static final String MEMORYBUNDLE = "com.garciaericn.memoryvault.MEMORYBUNDLE";
+    private static final int REQUESTCODE = 1001;
 
     private Context context;
     private SharedPreferences settings;
@@ -137,6 +138,8 @@ public class MemoryListActivity extends Activity
     public void onItemSelected(Memory memory) {
 
         Bundle b = memory.toBundle();
-//        Intent intent = new Intent(this, )
+        Intent intent = new Intent(this, MemoryDetailsActivity.class);
+        intent.putExtra(MEMORYBUNDLE, b);
+        startActivityForResult(intent, REQUESTCODE);
     }
 }

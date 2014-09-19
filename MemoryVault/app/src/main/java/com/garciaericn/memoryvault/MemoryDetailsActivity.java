@@ -3,6 +3,7 @@ package com.garciaericn.memoryvault;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -21,6 +22,7 @@ public class MemoryDetailsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memory_details);
+        Log.i(TAG, "onCreate entered");
 
         if (savedInstanceState == null) {
             // Create fragment
@@ -32,7 +34,8 @@ public class MemoryDetailsActivity extends Activity {
             //Load new fragment
             getFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.detail_fragment_container, fragment, MemoryDetailsFragment.TAG);
+                    .replace(R.id.detail_fragment_container, fragment, MemoryDetailsFragment.TAG)
+                    .commit();
         } else {
             // TODO: Load from savedInstanceState
         }
@@ -53,9 +56,11 @@ public class MemoryDetailsActivity extends Activity {
             }
             case R.id.action_discard_memory : {
                 // TODO: Delete memory
+                return true;
             }
             case R.id.action_edit_memory : {
                 // TODO: Edit memory
+                return true;
             }
             case R.id.action_settings : {
                 Intent intent = new Intent(this, SettingsActivity.class);

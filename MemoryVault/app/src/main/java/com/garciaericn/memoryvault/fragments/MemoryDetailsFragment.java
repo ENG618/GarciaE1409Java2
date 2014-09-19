@@ -46,13 +46,13 @@ public class MemoryDetailsFragment extends Fragment {
             eventTV.setText(memory.getEventName());
 
             TextView guestsTV = (TextView) view.findViewById(R.id.guestsTV);
-            guestsTV.setText(memory.getNumGuests());
+            guestsTV.setText(String.valueOf(memory.getNumGuests()));
 
             TextView locationTV = (TextView) view.findViewById(R.id.locationTV);
             locationTV.setText(memory.getEventLocation());
 
             TextView notesTV = (TextView) view.findViewById(R.id.notesTV);
-            eventTV.setText(memory.getEventNotes());
+            notesTV.setText(memory.getEventNotes());
         }
         return view;
     }
