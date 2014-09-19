@@ -10,7 +10,6 @@ import android.widget.ListView;
 import com.garciaericn.memoryvault.R;
 import com.garciaericn.memoryvault.data.Memory;
 import com.garciaericn.memoryvault.data.MemoryAdapter;
-import com.garciaericn.memoryvault.data.MemoryManager;
 
 import java.util.List;
 

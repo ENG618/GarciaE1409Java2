@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 
 import com.garciaericn.memoryvault.data.Memory;
 import com.garciaericn.memoryvault.data.MemoryAdapter;
@@ -76,6 +77,10 @@ public class MemoryListActivity extends Activity
                 startActivityForResult(intent, NEW_MEM_CODE);
                 return true;
             }
+            case R.id.actions_refresh : {
+                refresh();
+                return true;
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -97,15 +102,23 @@ public class MemoryListActivity extends Activity
     }
 
     private void refresh() {
-        MemoryManager mgr = new MemoryManager();
 
-        // Obtain HasMap of memories from manager
-        HashMap map = mgr.getMemories();
+        MemoryListFragment frag = (MemoryListFragment) getFragmentManager().findFragmentByTag(MemoryListFragment.TAG);
 
-        // Create
-        List<Memory> memoryList = new ArrayList<Memory>(map.values());
+        ArrayAdapter<Memory> adapter = (ArrayAdapter<Memory>) frag.getListAdapter();
 
-        manager.refreshMemories(this, R.layout.memory_list_item, memoryList);
+        adapter.notifyDataSetChanged();
+
+
+//        MemoryManager mgr = new MemoryManager();
+//
+//        // Obtain HasMap of memories from manager
+//        HashMap map = mgr.getMemories();
+//
+//        // Create
+//        List<Memory> memoryList = new ArrayList<Memory>(map.values());
+//
+//        manager.refreshMemories(this, R.layout.memory_list_item, memoryList);
     }
 
     private void checkFirstLaunch() {
@@ -140,12 +153,7 @@ public class MemoryListActivity extends Activity
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == NEW_MEM_CODE && resultCode == RESULT_OK) {
             // TODO: force refresh with notifyDataSetChanged()
-//            loadList();
             refresh();
-//            Bundle result = data.getExtras();
-//            Memory newMemory = new Memory(result);
-//
-//            manager.addMemory(newMemory);
         }
     }
 

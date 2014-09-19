@@ -2,6 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MemoryListActivity" >
 
+    <item android:id="@+id/actions_refresh"
+        android:title="Refresh"
+        android:icon="@drawable/ic_action_refresh"
+        android:showAsAction="collapseActionView|ifRoom" />
+
     <item android:id="@+id/action_add_memory"
         android:title="@string/actions_add_memory"
         android:icon="@drawable/ic_action_new"
