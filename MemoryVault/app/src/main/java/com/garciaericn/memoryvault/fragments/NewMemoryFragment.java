@@ -74,32 +74,35 @@ public class NewMemoryFragment extends Fragment {
 
         View view = getView();
         Memory newMemory;
-        int numGuests = 0;
+        int numGuests;
 
         if (view != null) {
             // Obtain all fields
             TextView eventTitleTV = (TextView) view.findViewById(R.id.newEventNameTV);
-            String eventTitle = (String) eventTitleTV.getText();
-            if (eventTitle == null) {
+            String eventTitle = String.valueOf(eventTitleTV.getText());
+            if (eventTitle == null || eventTitle.isEmpty()) {
                 alertDialog("Please enter and event title");
+                return;
             }
 
             TextView numGuestsTV = (TextView) view.findViewById(R.id.newGuestsTV);
-            String stringGuests = (String) numGuestsTV.getText();
-            if (stringGuests == null) {
+            String stringGuests = String.valueOf(numGuestsTV.getText());
+            if (stringGuests == null || stringGuests.isEmpty()) {
                 alertDialog("Please enter how many people were included");
+                return;
             } else {
-            numGuests = Integer.valueOf(stringGuests);
+            numGuests = Integer.parseInt(stringGuests);
             }
 
             TextView eventLocationTV = (TextView) view.findViewById(R.id.newLocationTV);
-            String eventLocation = (String) eventLocationTV.getText();
-            if (eventLocation == null) {
+            String eventLocation = String.valueOf(eventLocationTV.getText());
+            if (eventLocation == null || eventLocation.isEmpty()) {
                 alertDialog("Please enter a location");
+                return;
             }
 
             TextView eventNotesTV = (TextView) view.findViewById(R.id.newNotesTV);
-            String eventNotes = (String) eventNotesTV.getText();
+            String eventNotes = String.valueOf(eventNotesTV.getText());
 
 
             if (eventTitle != null && stringGuests != null && eventLocation != null) {

@@ -71,7 +71,8 @@ public class MemoryListActivity extends Activity
             }
             case R.id.action_add_memory : {
                 Intent intent = new Intent(this, NewMemoryActivity.class);
-                startActivityForResult(intent, NEW_MEM_CODE);
+                startActivity(intent);
+//                startActivityForResult(intent, NEW_MEM_CODE);
                 return true;
             }
         }
