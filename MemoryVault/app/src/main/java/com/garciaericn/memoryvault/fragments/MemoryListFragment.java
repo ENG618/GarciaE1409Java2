@@ -48,6 +48,9 @@ public class MemoryListFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
+        Log.i(TAG, "onListItemClick entered");
+        Memory memory = memoryList.get(position);
+
+
     }
 }
