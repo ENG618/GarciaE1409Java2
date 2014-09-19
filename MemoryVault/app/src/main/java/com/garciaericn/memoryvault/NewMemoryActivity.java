@@ -35,7 +35,7 @@ public class NewMemoryActivity extends Activity {
             // Load new fragment
             getFragmentManager()
                     .beginTransaction()
-                    .add(R.id.add_fragment_container, frag)
+                    .replace(R.id.add_fragment_container, frag, NewMemoryFragment.TAG)
                     .commit();
         } else { // Application recreated from saved state
             Log.i(TAG, "onCreate from saved instance");
