@@ -12,7 +12,7 @@ Week 2: Eric's Weather Forecaster
 * See EricsWeatherForecaster.apk
 
 Week 3:
-* To be completed on 9/18
+* See MemoryVault.apk
 
 Week 4:
 * To be completed on 9/25
