@@ -66,10 +66,10 @@ public class MemoryManager {
     }
 
     // Removes a given memory
-    public void removeMemory(Context context, Memory memory) {
+    public void removeMemory(Memory memory) {
         Log.i(TAG, "removeMemory entered");
         memories.remove(memory.getMemoryKey());
-//        writeToDisk(context, memory);
+        writeToDisk(memories);
     }
 
     private Boolean checkFile (Context context, String fileName) {
@@ -98,7 +98,7 @@ public class MemoryManager {
             }
     }
 
-    private String readFromDisk(String fileName) {
+    private void readFromDisk(String fileName) {
         Log.i(TAG, "readFromFile entered");
 
         File external = context.getExternalFilesDir(null);
@@ -121,30 +121,5 @@ public class MemoryManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-//        try {
-//            FileInputStream fis = new FileInputStream(file);
-//            // Create stream readers
-//            InputStreamReader inReader = new InputStreamReader(fis);
-//            BufferedReader reader = new BufferedReader(inReader);
-//
-//            // Read data and pass to StringBuffer
-//            StringBuilder buffer = new StringBuilder();
-//            String text;
-//            // Make sure a line of text is available to be read
-//            while ((text = reader.readLine()) != null) {
-//                buffer.append(text);
-//            }
-//            Log.i(TAG, "String from file: " + buffer.toString());
-//
-//            savedWeatherString = buffer.toString();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return savedWeatherString;
-        return null;
     }
 }

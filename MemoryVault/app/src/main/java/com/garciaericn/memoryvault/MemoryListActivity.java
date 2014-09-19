@@ -15,7 +15,6 @@ import com.garciaericn.memoryvault.data.MemoryManager;
 import com.garciaericn.memoryvault.fragments.MemoryListFragment;
 import com.garciaericn.memoryvault.fragments.SettingsFragment;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +22,6 @@ import java.util.List;
 public class MemoryListActivity extends Activity {
 
     public static final String TAG = "MemoryListActivity.TAG";
-    public static final String FILENAME = "SavedMemories";
     private static final int NEW_MEM_CODE = 1234;
     public static final String MEMORYBUNDLE = "com.garciaericn.memoryvault.MEMORYBUNDLE";
 
@@ -119,7 +117,7 @@ public class MemoryListActivity extends Activity {
         manager.addMemory(new Memory("Project 3", 1, "Home", "Coming along pretty good so far"));
         manager.addMemory(new Memory("Family Vacation", 4, "Ruskin, FL", "Had some well deserved quality time with the family"));
         manager.addMemory(new Memory("Birthday", 25, "Party house", "HAPPY BIRTHDAY!!"));
-        manager.addMemory(new Memory("Anniversary", 2, "Romantic restaurant", "Always fun spending time with my wife"));manager.addMemory(new Memory("Project 3", 1, "Home", "Coming along pretty good so far"));
+        manager.addMemory(new Memory("Anniversary", 2, "Romantic restaurant", "Always fun spending time with my wife"));
     }
 
     @Override
