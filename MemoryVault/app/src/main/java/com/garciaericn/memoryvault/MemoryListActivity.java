@@ -41,6 +41,7 @@ public class MemoryListActivity extends Activity {
         context = this;
         settings = PreferenceManager.getDefaultSharedPreferences(this);
         manager = new MemoryManager();
+        manager.newInstance(this);
 
         // Check if first launch
         checkFirstLaunch();

@@ -14,14 +14,25 @@ import java.util.HashMap;
 public class MemoryManager {
 
     private static final String TAG = "MemoryManager.TAG";
+    private Context context;
+
     public HashMap <String, Memory> memories;
+
 
     // Initializes memories HashMap if null
     public MemoryManager() {
         Log.i(TAG, "MemoryManager Created");
+    }
+
+    public MemoryManager newInstance(Context context) {
+        Log.i(TAG, "newInstance entered");
+
+        MemoryManager mgr = new MemoryManager();
         if (memories == null) {
             memories = new HashMap<String, Memory>();
         }
+        this.context = context;
+        return mgr;
     }
 
     public HashMap<String, Memory> getMemories() {
@@ -36,12 +47,14 @@ public class MemoryManager {
     public void addMemory(Memory memory) {
         Log.i(TAG, "addMemory entered");
         memories.put(memory.getMemoryKey(), memory);
+
     }
 
     // Removes a given memory
-    public void removeMemory(Memory memory) {
+    public void removeMemory(Context context, Memory memory) {
         Log.i(TAG, "removeMemory entered");
         memories.remove(memory.getMemoryKey());
+//        writeToDisk(context, memory);
     }
 
     private Boolean checkFile (Context context, String fileName) {
@@ -52,7 +65,7 @@ public class MemoryManager {
         return file.exists();
     }
 
-    public void writeToDisk(Context context, Memory memory) {
+    public void writeToDisk(Context context, HashMap<String, Memory> memories) {
         Log.i(TAG, "writeToDisk entered");
         // TODO: Add save code
 //        // Store data in "protected" directory
