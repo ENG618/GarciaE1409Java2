@@ -46,9 +46,6 @@ public class MemoryListActivity extends Activity {
         // Check if first launch
         checkFirstLaunch();
 
-        // TODO: remove redundant load dummy data call once save is implemented
-        loadDummyMemories();
-
         loadList();
     }
 
@@ -80,67 +77,6 @@ public class MemoryListActivity extends Activity {
             }
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private Boolean checkFile (String fileName) {
-        Log.i(TAG, "checkFile entered");
-        // Store data in "protected" directory
-        File external = context.getExternalFilesDir(null);
-        File file = new File(external, fileName);
-        return file.exists();
-    }
-
-    private void writeToFile(Context context, String fileName, String data) {
-        Log.i(TAG, "writeToFile entered");
-        // TODO: Save Data to protected storage
-//        // Store data in "protected" directory
-//        File external = context.getExternalFilesDir(null);
-//        File file = new File(external, fileName);
-//
-//        try {
-//            //Create new output stream
-//            FileOutputStream fos = new FileOutputStream(file);
-//            // Convert string to byte and write to stream
-//            fos.write(data.getBytes());
-//            // Close the stream to sve the file
-//            fos.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-    }
-
-    private String readFromFile(String fileName) {
-        Log.i(TAG, "readFromFile entered");
-        // TODO: Read data from saved file
-
-//        String savedWeatherString = null;
-//
-//        File external = getExternalFilesDir(null);
-//        File file = new File(external, fileName);
-//
-//        try {
-//            FileInputStream fis = new FileInputStream(file);
-//            // Create stream readers
-//            InputStreamReader inReader = new InputStreamReader(fis);
-//            BufferedReader reader = new BufferedReader(inReader);
-//
-//            // Read data and pass to StringBuffer
-//            StringBuilder buffer = new StringBuilder();
-//            String text;
-//            // Make sure a line of text is available to be read
-//            while ((text = reader.readLine()) != null) {
-//                buffer.append(text);
-//            }
-//            Log.i(TAG, "String from file: " + buffer.toString());
-//
-//            savedWeatherString = buffer.toString();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return savedWeatherString;
-        return null;
     }
 
     private void loadList(){

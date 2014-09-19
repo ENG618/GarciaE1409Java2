@@ -4,10 +4,14 @@ import android.content.Context;
 import android.util.Log;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OptionalDataException;
+import java.io.StreamCorruptedException;
 import java.util.HashMap;
 
 /**
@@ -32,13 +36,17 @@ public class MemoryManager {
     public MemoryManager newInstance(Context context) {
         Log.i(TAG, "newInstance entered");
 
-        //TODO: Check is disk has stored data.
-
         MemoryManager mgr = new MemoryManager();
-        if (memories == null) {
-            memories = new HashMap<String, Memory>();
-        }
         this.context = context;
+
+        if (checkFile(context, FILENAME)) {
+            readFromDisk(FILENAME);
+        } else {
+            if (memories == null) {
+                memories = new HashMap<String, Memory>();
+            }
+        }
+
         return mgr;
     }
 
@@ -92,13 +100,29 @@ public class MemoryManager {
 
     private String readFromDisk(String fileName) {
         Log.i(TAG, "readFromFile entered");
-        // TODO: Read data from saved file
 
-//        String savedWeatherString = null;
-//
-//        File external = getExternalFilesDir(null);
-//        File file = new File(external, fileName);
-//
+        File external = context.getExternalFilesDir(null);
+        File file = new File(external, fileName);
+
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+            memories = (HashMap<String, Memory>) objectInputStream.readObject();
+            objectInputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (OptionalDataException e) {
+            e.printStackTrace();
+        } catch (StreamCorruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
 //        try {
 //            FileInputStream fis = new FileInputStream(file);
 //            // Create stream readers
