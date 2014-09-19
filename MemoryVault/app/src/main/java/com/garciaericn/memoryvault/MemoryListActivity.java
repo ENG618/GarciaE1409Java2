@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.garciaericn.memoryvault.data.Memory;
+import com.garciaericn.memoryvault.data.MemoryAdapter;
 import com.garciaericn.memoryvault.data.MemoryManager;
 import com.garciaericn.memoryvault.fragments.MemoryListFragment;
 import com.garciaericn.memoryvault.fragments.SettingsFragment;
@@ -72,8 +73,7 @@ public class MemoryListActivity extends Activity
             }
             case R.id.action_add_memory : {
                 Intent intent = new Intent(this, NewMemoryActivity.class);
-                startActivity(intent);
-//                startActivityForResult(intent, NEW_MEM_CODE);
+                startActivityForResult(intent, NEW_MEM_CODE);
                 return true;
             }
         }
@@ -94,6 +94,18 @@ public class MemoryListActivity extends Activity
                 .beginTransaction()
                 .replace(R.id.memory_list_fragment_container, frag, MemoryListFragment.TAG)
                 .commit();
+    }
+
+    private void refresh() {
+        MemoryManager mgr = new MemoryManager();
+
+        // Obtain HasMap of memories from manager
+        HashMap map = mgr.getMemories();
+
+        // Create
+        List<Memory> memoryList = new ArrayList<Memory>(map.values());
+
+        manager.refreshMemories(this, R.layout.memory_list_item, memoryList);
     }
 
     private void checkFirstLaunch() {
@@ -127,10 +139,13 @@ public class MemoryListActivity extends Activity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == NEW_MEM_CODE && resultCode == RESULT_OK) {
-            Bundle result = data.getExtras();
-            Memory newMemory = new Memory(result);
-
-            manager.addMemory(newMemory);
+            // TODO: force refresh with notifyDataSetChanged()
+//            loadList();
+            refresh();
+//            Bundle result = data.getExtras();
+//            Memory newMemory = new Memory(result);
+//
+//            manager.addMemory(newMemory);
         }
     }
 

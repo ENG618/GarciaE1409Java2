@@ -21,6 +21,10 @@ public class MemoryDetailsFragment extends Fragment {
 
     private Memory memory;
 
+    public interface MemoryDetailsFragmentCallbacks {
+        public void discardMemory(Memory discardedMemory);
+    }
+
     public MemoryDetailsFragment() {}
 
     @Override

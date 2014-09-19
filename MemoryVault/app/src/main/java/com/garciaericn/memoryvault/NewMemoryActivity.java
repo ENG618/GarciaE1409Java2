@@ -86,6 +86,9 @@ public class NewMemoryActivity extends Activity
     @Override
     public void addMemory(Memory newMemory) {
         manager.addMemory(newMemory);
+
+        Intent returnIntent = new Intent();
+        setResult(RESULT_OK, returnIntent);
         finish();
     }
 }

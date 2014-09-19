@@ -13,6 +13,7 @@ import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
 import java.io.StreamCorruptedException;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Full Sail University
@@ -61,6 +62,7 @@ public class MemoryManager {
     // Adds given memory
     public void addMemory(Memory memory) {
         Log.i(TAG, "addMemory entered");
+        readFromDisk(FILENAME);
         memories.put(memory.getMemoryKey(), memory);
         writeToDisk(memories);
     }
@@ -70,6 +72,12 @@ public class MemoryManager {
         Log.i(TAG, "removeMemory entered");
         memories.remove(memory.getMemoryKey());
         writeToDisk(memories);
+    }
+
+    public void refreshMemories(Context context, int resource, List<Memory> memoryList) {
+        MemoryAdapter adapter = new MemoryAdapter(context, resource, memoryList);
+        adapter.refresh();
+//        adapter.notifyDataSetChanged();
     }
 
     private Boolean checkFile (Context context, String fileName) {

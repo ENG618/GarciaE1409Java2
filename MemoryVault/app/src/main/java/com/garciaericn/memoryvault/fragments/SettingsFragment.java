@@ -1,8 +1,10 @@
 package com.garciaericn.memoryvault.fragments;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.garciaericn.memoryvault.R;
 
@@ -24,6 +26,8 @@ public class SettingsFragment extends PreferenceFragment {
 
         // Load the xml
         addPreferencesFromResource(R.xml.settings);
+
+
     }
     // TODO: Set up any preferences onClicks
 }

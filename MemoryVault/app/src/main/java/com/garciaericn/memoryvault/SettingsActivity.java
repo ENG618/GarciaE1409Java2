@@ -1,8 +1,10 @@
 package com.garciaericn.memoryvault;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.garciaericn.memoryvault.fragments.SettingsFragment;
 
@@ -21,6 +23,8 @@ public class SettingsActivity extends Activity {
         Log.i(TAG, "onCreate entered");
         setContentView(R.layout.activity_settings);
 
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
         // Create instance of preferences fragment
         SettingsFragment frag = new SettingsFragment();
 
@@ -29,5 +33,16 @@ public class SettingsActivity extends Activity {
                 .beginTransaction()
                 .replace(R.id.settings_fragment_container, frag, SettingsActivity.TAG)
                 .commit();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home : {
+                Log.i(TAG, "Up button pressed");
+                finish();
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

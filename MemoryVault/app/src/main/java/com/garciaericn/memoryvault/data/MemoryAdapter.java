@@ -57,4 +57,8 @@ public class MemoryAdapter extends ArrayAdapter<Memory> {
 
         return view;
     }
+
+    public void refresh() {
+        notifyDataSetChanged();
+    }
 }
