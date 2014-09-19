@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.garciaericn.memoryvault.data.Memory;
 import com.garciaericn.memoryvault.fragments.MemoryDetailsFragment;
 
 /**
@@ -17,6 +18,8 @@ import com.garciaericn.memoryvault.fragments.MemoryDetailsFragment;
 public class MemoryDetailsActivity extends Activity {
 
     public static final String TAG = "MemoryDetailsActivity.TAG";
+
+    private Memory memory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,10 @@ public class MemoryDetailsActivity extends Activity {
             // Obtain bundle from intent
             Bundle b = getIntent().getBundleExtra(MemoryListActivity.MEMORYBUNDLE);
             fragment.setArguments(b);
+
+            if (b != null && b.containsKey(Memory.EVENT_KEY)) {
+                memory = new Memory(b);
+            }
 
             //Load new fragment
             getFragmentManager()
@@ -51,7 +58,25 @@ public class MemoryDetailsActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_share_memory : {
-                // TODO: Share memory
+
+                if (memory != null) {
+                    StringBuilder builder = new StringBuilder();
+                    builder.append("Check out my event: ");
+                    builder.append(memory.getEventName());
+                    builder.append(" with ");
+                    builder.append(String.valueOf(memory.getNumGuests()));
+                    builder.append(" guests. At ");
+                    builder.append(memory.getEventLocation());
+                    builder.append(".");
+                    builder.append(System.getProperty("line.separator"));
+                    builder.append("--Sent from Memory Vault");
+
+                    Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, (java.io.Serializable) builder);
+                    sendIntent.setType("text/plain");
+                    startActivity(Intent.createChooser(sendIntent, "Share Memory with..."));
+                }
+
                 return true;
             }
             case R.id.action_discard_memory : {
