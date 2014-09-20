@@ -56,13 +56,13 @@ public class MemoryManager {
     }
 
     public Memory getMemory(String key) {
+        readFromDisk(FILENAME);
         return memories.get(key);
     }
 
     // Adds given memory
     public void addMemory(Memory memory) {
         Log.i(TAG, "addMemory entered");
-        readFromDisk(FILENAME);
         memories.put(memory.getMemoryKey(), memory);
         writeToDisk(memories);
     }
@@ -76,7 +76,7 @@ public class MemoryManager {
 
     public void refreshMemories(Context context, int resource, List<Memory> memoryList) {
         MemoryAdapter adapter = new MemoryAdapter(context, resource, memoryList);
-        adapter.refresh();
+        adapter.refresh(memoryList);
 //        adapter.notifyDataSetChanged();
     }
 

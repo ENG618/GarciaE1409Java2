@@ -77,10 +77,11 @@ public class MemoryListActivity extends Activity
                 startActivityForResult(intent, NEW_MEM_CODE);
                 return true;
             }
-            case R.id.actions_refresh : {
-                refresh();
-                return true;
-            }
+//            case R.id.actions_refresh : {
+//                refresh();
+//                loadList();
+//                return true;
+//            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -102,23 +103,14 @@ public class MemoryListActivity extends Activity
     }
 
     private void refresh() {
+        HashMap<String, Memory> memories = manager.getMemories();
 
-        MemoryListFragment frag = (MemoryListFragment) getFragmentManager().findFragmentByTag(MemoryListFragment.TAG);
+        List<Memory> memoryList = new ArrayList<Memory>(memories.values());
 
-        ArrayAdapter<Memory> adapter = (ArrayAdapter<Memory>) frag.getListAdapter();
+
+        MemoryAdapter adapter = new MemoryAdapter(this, R.layout.memory_list_item, memoryList);
 
         adapter.notifyDataSetChanged();
-
-
-//        MemoryManager mgr = new MemoryManager();
-//
-//        // Obtain HasMap of memories from manager
-//        HashMap map = mgr.getMemories();
-//
-//        // Create
-//        List<Memory> memoryList = new ArrayList<Memory>(map.values());
-//
-//        manager.refreshMemories(this, R.layout.memory_list_item, memoryList);
     }
 
     private void checkFirstLaunch() {
