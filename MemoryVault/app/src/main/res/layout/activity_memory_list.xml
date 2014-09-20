@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MemoryListActivity">
+    tools:context=".MemoryListActivity"
+    android:background="#96FFAE">
 
     <LinearLayout
         android:id="@+id/memory_list_fragment_container"

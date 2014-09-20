@@ -103,14 +103,22 @@ public class MemoryListActivity extends Activity
     }
 
     private void refresh() {
-        HashMap<String, Memory> memories = manager.getMemories();
 
-        List<Memory> memoryList = new ArrayList<Memory>(memories.values());
+        MemoryListFragment frag = new MemoryListFragment();
 
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.memory_list_fragment_container, frag, MemoryListFragment.TAG)
+                .commit();
 
-        MemoryAdapter adapter = new MemoryAdapter(this, R.layout.memory_list_item, memoryList);
-
-        adapter.notifyDataSetChanged();
+//        HashMap<String, Memory> memories = manager.getMemories();
+//
+//        List<Memory> memoryList = new ArrayList<Memory>(memories.values());
+//
+//
+//        MemoryAdapter adapter = new MemoryAdapter(this, R.layout.memory_list_item, memoryList);
+//
+//        adapter.notifyDataSetChanged();
     }
 
     private void checkFirstLaunch() {

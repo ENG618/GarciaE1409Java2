@@ -7,6 +7,7 @@
     android:layout_height="fill_parent"
     android:layout_centerVertical="true"
     android:layout_centerHorizontal="true"
-    tools:layout="@layout/fragment_new_memory" >
+    tools:layout="@layout/fragment_new_memory"
+    android:background="#96FFAE" >
 
 </FrameLayout>

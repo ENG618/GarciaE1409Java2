@@ -60,6 +60,6 @@ public class MemoryAdapter extends ArrayAdapter<Memory> {
 
     public void refresh(List<Memory> memoryList) {
         this.objects = memoryList;
-        notifyDataSetChanged();
+
     }
 }

@@ -8,6 +8,7 @@
     android:layout_centerVertical="true"
     android:layout_centerHorizontal="true"
     tools:layout="@layout/fragment_memory_details"
-    tools:context=".MemoryDetailsActivity" >
+    tools:context=".MemoryDetailsActivity"
+    android:background="#96FFAE" >
 
 </FrameLayout>
