@@ -20,7 +20,7 @@ public class MemoryDetailsActivity extends Activity
     implements MemoryDetailsFragment.MemoryDetailsFragmentCallbacks{
 
     public static final String TAG = "MemoryDetailsActivity.TAG";
-    private static final int DISCARDCODE = 4321;
+    public static final int DISCARDCODE = 4321;
 
     private MemoryManager manager;
     private Memory memory;
@@ -87,7 +87,7 @@ public class MemoryDetailsActivity extends Activity
                 return true;
             }
             case R.id.action_discard_memory : {
-                // TODO: Delete memory
+                discardMemory(memory);
                 return true;
             }
             case R.id.action_edit_memory : {
@@ -106,6 +106,9 @@ public class MemoryDetailsActivity extends Activity
     @Override
     public void discardMemory(Memory discardedMemory) {
         manager.removeMemory(discardedMemory);
-        finishActivity(DISCARDCODE);
+
+        Intent returnIntent = new Intent();
+        setResult(DISCARDCODE, returnIntent);
+        finish();
     }
 }

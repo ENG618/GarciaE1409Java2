@@ -147,6 +147,11 @@ public class MemoryListActivity extends Activity
             // TODO: force refresh with notifyDataSetChanged()
             refresh();
         }
+
+        if (requestCode == REQUESTCODE  && resultCode == MemoryDetailsActivity.DISCARDCODE) {
+            Log.i(TAG, "Memory was deleted");
+
+        }
     }
 
     @Override

@@ -1,9 +1,11 @@
 package com.garciaericn.memoryvault.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ public class MemoryDetailsFragment extends Fragment {
     public static final String TAG = "MemoryDetailsFragment.TAG";
 
     private Memory memory;
+    private MemoryDetailsFragmentCallbacks activity;
 
     public interface MemoryDetailsFragmentCallbacks {
         public void discardMemory(Memory discardedMemory);
@@ -32,10 +35,34 @@ public class MemoryDetailsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate entered");
 
+        setHasOptionsMenu(true);
+
         Bundle b = getArguments();
         if (b != null && b.containsKey(Memory.EVENT_KEY)) {
             memory = new Memory(b);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_discard_memory : {
+                Log.i(TAG, "Save from fragments");
+                discard();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void discard() {
+        activity.discardMemory(memory);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = (MemoryDetailsFragmentCallbacks) activity;
     }
 
     @Override
