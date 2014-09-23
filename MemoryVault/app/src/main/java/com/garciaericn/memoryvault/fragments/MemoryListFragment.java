@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.garciaericn.memoryvault.R;
 import com.garciaericn.memoryvault.data.Memory;
 import com.garciaericn.memoryvault.data.MemoryAdapter;
+import com.garciaericn.memoryvault.data.MemoryManager;
 
 import java.util.List;
 
@@ -20,6 +20,7 @@ import java.util.List;
  * Mobile Development BS
  * Created by ENG618-Mac on 9/15/14.
  */
+
 public class MemoryListFragment extends ListFragment {
     public static final String TAG = "MemoryListFragment.TAG";
     private static List<Memory> memoryList;
@@ -79,12 +80,18 @@ public class MemoryListFragment extends ListFragment {
         switch (item.getItemId()) {
             case R.id.actions_refresh : {
                 Log.i(TAG, "Refresh from fragments");
-                adapter.refresh(memoryList);
+//                adapter.refresh(memoryList);
 
+                updateList();
                 adapter.notifyDataSetChanged();
                 return true;
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void updateList() {
+        MemoryManager mgr = new MemoryManager();
+        memoryList = mgr.getMemories(getActivity());
     }
 }

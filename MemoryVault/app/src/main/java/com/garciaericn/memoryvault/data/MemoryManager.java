@@ -12,6 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
 import java.io.StreamCorruptedException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class MemoryManager {
         return mgr;
     }
 
-    public HashMap<String, Memory> getMemories() {
+    public HashMap<String, Memory> getMemoryMap() {
         return memories;
     }
 
@@ -74,12 +75,6 @@ public class MemoryManager {
         writeToDisk(memories);
     }
 
-    public void refreshMemories(Context context, int resource, List<Memory> memoryList) {
-        MemoryAdapter adapter = new MemoryAdapter(context, resource, memoryList);
-        adapter.refresh(memoryList);
-//        adapter.notifyDataSetChanged();
-    }
-
     private Boolean checkFile (Context context, String fileName) {
         Log.i(TAG, "checkFile entered");
         // Store data in "protected" directory
@@ -93,41 +88,51 @@ public class MemoryManager {
 
         File external = context.getExternalFilesDir(null);
         File file = new File(external, FILENAME);
-            try {
-                FileOutputStream fileOutputStream = new FileOutputStream(file);
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
-                objectOutputStream.writeObject(memories);
-                objectOutputStream.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            objectOutputStream.writeObject(memories);
+            objectOutputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void readFromDisk(String fileName) {
         Log.i(TAG, "readFromFile entered");
 
-        File external = context.getExternalFilesDir(null);
-        File file = new File(external, fileName);
+        if (checkFile(context, FILENAME)) {
+            File external = context.getExternalFilesDir(null);
+            File file = new File(external, fileName);
 
-        try {
-            FileInputStream fileInputStream = new FileInputStream(file);
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            try {
+                FileInputStream fileInputStream = new FileInputStream(file);
+                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
-            memories = (HashMap<String, Memory>) objectInputStream.readObject();
-            objectInputStream.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (OptionalDataException e) {
-            e.printStackTrace();
-        } catch (StreamCorruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+                memories = (HashMap<String, Memory>) objectInputStream.readObject();
+                objectInputStream.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (OptionalDataException e) {
+                e.printStackTrace();
+            } catch (StreamCorruptedException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    public List<Memory> getMemories(Context context) {
+        this.context = context;
+        // Read from disk to get most updated info
+        readFromDisk(FILENAME);
+        // Create list of values for return
+        return new ArrayList<Memory>(memories.values());
     }
 }

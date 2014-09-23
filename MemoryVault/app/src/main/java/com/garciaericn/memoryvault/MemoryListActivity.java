@@ -9,10 +9,8 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 
 import com.garciaericn.memoryvault.data.Memory;
-import com.garciaericn.memoryvault.data.MemoryAdapter;
 import com.garciaericn.memoryvault.data.MemoryManager;
 import com.garciaericn.memoryvault.fragments.MemoryListFragment;
 import com.garciaericn.memoryvault.fragments.SettingsFragment;
@@ -88,7 +86,7 @@ public class MemoryListActivity extends Activity
 
     private void loadList(){
         // Obtain HasMap of memories from manager
-        HashMap map = manager.getMemories();
+        HashMap map = manager.getMemoryMap();
 
         // Create
         List<Memory> memoryList = new ArrayList<Memory>(map.values());
@@ -100,25 +98,6 @@ public class MemoryListActivity extends Activity
                 .beginTransaction()
                 .replace(R.id.memory_list_fragment_container, frag, MemoryListFragment.TAG)
                 .commit();
-    }
-
-    private void refresh() {
-
-        MemoryListFragment frag = new MemoryListFragment();
-
-        getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.memory_list_fragment_container, frag, MemoryListFragment.TAG)
-                .commit();
-
-//        HashMap<String, Memory> memories = manager.getMemories();
-//
-//        List<Memory> memoryList = new ArrayList<Memory>(memories.values());
-//
-//
-//        MemoryAdapter adapter = new MemoryAdapter(this, R.layout.memory_list_item, memoryList);
-//
-//        adapter.notifyDataSetChanged();
     }
 
     private void checkFirstLaunch() {
@@ -153,7 +132,7 @@ public class MemoryListActivity extends Activity
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == NEW_MEM_CODE && resultCode == RESULT_OK) {
             // TODO: force refresh with notifyDataSetChanged()
-            refresh();
+//            refresh();
         }
 
         if (requestCode == REQUESTCODE  && resultCode == MemoryDetailsActivity.DISCARDCODE) {

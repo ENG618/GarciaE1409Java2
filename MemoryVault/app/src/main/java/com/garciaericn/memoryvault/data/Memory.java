@@ -5,7 +5,6 @@ import android.os.Bundle;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.SecureRandom;
-import java.util.Random;
 
 /**
  * Full Sail University
@@ -40,6 +39,7 @@ public class Memory implements Serializable {
         this.memoryKey = generateKey();
     }
 
+    // Random key generator
     private String generateKey() {
         SecureRandom random = new SecureRandom();
 
