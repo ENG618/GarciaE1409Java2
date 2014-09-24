@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ActionMode;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
@@ -26,6 +28,7 @@ public class MemoryListFragment extends ListFragment {
     private static List<Memory> memoryList;
     private MemoryListFragmentCallback activity;
     private MemoryAdapter adapter;
+    private ActionMode actionMode;
 
     public interface MemoryListFragmentCallback {
         public void onItemSelected(Memory memory);
@@ -64,11 +67,12 @@ public class MemoryListFragment extends ListFragment {
             setListAdapter(adapter);
         }
 
-//        if (memoryList != null) {
-//            adapter = new MemoryAdapter(getActivity(), R.layout.memory_list_item, memoryList);
-//            setListAdapter(adapter);
-//        }
-
+        getListView().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return false;
+            }
+        });
     }
 
     @Override
@@ -101,5 +105,28 @@ public class MemoryListFragment extends ListFragment {
     private void updateList() {
         MemoryManager mgr = new MemoryManager();
         memoryList = mgr.getMemories(getActivity());
+    }
+
+    // Contextual Actionbar Callback
+    private ActionMode.Callback actionModeCallback = new ActionMode.Callback() {
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            return false;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+
+        }
     }
 }
