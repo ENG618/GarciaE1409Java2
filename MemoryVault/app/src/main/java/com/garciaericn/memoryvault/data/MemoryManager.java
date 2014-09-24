@@ -26,6 +26,8 @@ public class MemoryManager {
     private static final String TAG = "MemoryManager.TAG";
     private static final String FILENAME = "Memories";
     private Context context;
+    private MemoryManager mgr;
+    private List<Memory> memoriesList;
 
     public HashMap <String, Memory> memories;
 
@@ -38,7 +40,10 @@ public class MemoryManager {
     public MemoryManager newInstance(Context context) {
         Log.i(TAG, "newInstance entered");
 
-        MemoryManager mgr = new MemoryManager();
+        if (mgr == null) {
+            mgr = new MemoryManager();
+        }
+
         this.context = context;
 
         if (checkFile(context, FILENAME)) {
@@ -132,7 +137,11 @@ public class MemoryManager {
         this.context = context;
         // Read from disk to get most updated info
         readFromDisk(FILENAME);
+//        if (memoriesList == null) {
+            memoriesList = new ArrayList<Memory>(memories.values());
+//        }
+//        memoriesList = (List<Memory>) memories.values();
         // Create list of values for return
-        return new ArrayList<Memory>(memories.values());
+        return memoriesList;
     }
 }

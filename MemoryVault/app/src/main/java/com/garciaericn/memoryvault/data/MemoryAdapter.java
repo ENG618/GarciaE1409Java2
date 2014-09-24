@@ -28,8 +28,6 @@ public class MemoryAdapter extends ArrayAdapter<Memory> {
         super(context,resource, memoryList);
         this.context = context;
         this.objects = memoryList;
-
-
     }
 
     @Override

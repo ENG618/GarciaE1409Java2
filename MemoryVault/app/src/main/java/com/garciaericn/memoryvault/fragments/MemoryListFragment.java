@@ -55,10 +55,19 @@ public class MemoryListFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
         Log.i(TAG, "onActivityCreated");
 
+        MemoryManager mgr = new MemoryManager();
+        mgr = mgr.newInstance(getActivity());
+        memoryList = mgr.getMemories(getActivity());
+
         if (memoryList != null) {
             adapter = new MemoryAdapter(getActivity(), R.layout.memory_list_item, memoryList);
             setListAdapter(adapter);
         }
+
+//        if (memoryList != null) {
+//            adapter = new MemoryAdapter(getActivity(), R.layout.memory_list_item, memoryList);
+//            setListAdapter(adapter);
+//        }
 
     }
 
@@ -80,7 +89,6 @@ public class MemoryListFragment extends ListFragment {
         switch (item.getItemId()) {
             case R.id.actions_refresh : {
                 Log.i(TAG, "Refresh from fragments");
-//                adapter.refresh(memoryList);
 
                 updateList();
                 adapter.notifyDataSetChanged();
