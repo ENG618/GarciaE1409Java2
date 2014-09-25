@@ -2,10 +2,85 @@
 <resources>
 
     <string name="app_name">"Little League Roster "</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section1">Team 1</string>
+    <string name="title_section2">Team 2</string>
+    <string name="title_section3">Team 3</string>
+    <string name="title_section4">Team 4</string>
+    <string name="title_section5">Team 5</string>
+    <string name="title_section6">Team 6</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="team_one" >
+        <item>Player A-1</item>
+        <item>Player A-2</item>
+        <item>Player A-3</item>
+        <item>Player A-4</item>
+        <item>Player A-5</item>
+        <item>Player A-6</item>
+        <item>Player A-7</item>
+        <item>Player A-8</item>
+        <item>Player A-9</item>
+    </string-array>
+
+    <string-array name="team_two" >
+        <item>Player B-1</item>
+        <item>Player B-2</item>
+        <item>Player B-3</item>
+        <item>Player B-4</item>
+        <item>Player B-5</item>
+        <item>Player B-6</item>
+        <item>Player B-7</item>
+        <item>Player B-8</item>
+        <item>Player B-9</item>
+    </string-array>
+
+    <string-array name="team_three" >
+        <item>Player C-1</item>
+        <item>Player C-2</item>
+        <item>Player C-3</item>
+        <item>Player C-4</item>
+        <item>Player C-5</item>
+        <item>Player C-6</item>
+        <item>Player C-7</item>
+        <item>Player C-8</item>
+        <item>Player C-9</item>
+    </string-array>
+
+    <string-array name="team_four" >
+        <item>Player D-1</item>
+        <item>Player D-2</item>
+        <item>Player D-3</item>
+        <item>Player D-4</item>
+        <item>Player D-5</item>
+        <item>Player D-6</item>
+        <item>Player D-7</item>
+        <item>Player D-8</item>
+        <item>Player D-9</item>
+    </string-array>
+
+    <string-array name="team_five" >
+        <item>Player E-1</item>
+        <item>Player E-2</item>
+        <item>Player E-3</item>
+        <item>Player E-4</item>
+        <item>Player E-5</item>
+        <item>Player E-6</item>
+        <item>Player E-7</item>
+        <item>Player E-8</item>
+        <item>Player E-9</item>
+    </string-array>
+
+    <string-array name="team_six" >
+        <item>Player F-1</item>
+        <item>Player F-2</item>
+        <item>Player F-3</item>
+        <item>Player F-4</item>
+        <item>Player F-5</item>
+        <item>Player F-6</item>
+        <item>Player F-7</item>
+        <item>Player F-8</item>
+        <item>Player F-9</item>
+    </string-array>
 
 </resources>
