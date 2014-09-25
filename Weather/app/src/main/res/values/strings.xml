@@ -7,5 +7,9 @@
     <string name="title_section3">Section 3</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="label_temp">temp</string>
+    <string name="label_feels">feels</string>
+    <string name="label_weather">weather</string>
+    <string name="label_updated">updated</string>
 
 </resources>
