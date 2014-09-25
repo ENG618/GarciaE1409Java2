@@ -2,12 +2,14 @@
 <resources>
 
     <string name="app_name">News</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section1">Feature</string>
+    <string name="title_section2">Current Events</string>
+    <string name="title_section3">Gallery</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
+    <string name="feature_body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, cumque quia. Dicta blanditiis, a rem, obcaecati, repellat suscipit quidem perspiciatis tempora consequuntur illo similique id neque! Consectetur temporibus aut dignissimos a magnam dolorem nihil possimus adipisci! Iste expedita velit modi facere illum, qui nemo, numquam ex, ipsa eaque ab nam!</string>
+    <string name="feature_heading">Breaking News</string>
 
 </resources>
