@@ -1,10 +1,12 @@
 package com.garciaericn.littleleagueroster;
 
 import android.app.ListFragment;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 /**
  * Full Sail University
@@ -17,6 +19,7 @@ public class TeamFragment extends ListFragment {
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
+    private String[] players;
 
     public TeamFragment() {
     }
@@ -25,12 +28,51 @@ public class TeamFragment extends ListFragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static TeamFragment newInstance(int sectionNumber) {
+    public TeamFragment newInstance(int sectionNumber) {
+
         TeamFragment fragment = new TeamFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        Resources res = getResources();
+
+        if (savedInstanceState != null  && savedInstanceState.containsKey(ARG_SECTION_NUMBER)) {
+            Bundle b = getArguments();
+            int sectionNumber = b.getInt(ARG_SECTION_NUMBER);
+            switch (sectionNumber) {
+                case 1 : {
+                    players = res.getStringArray(R.array.team_one);
+                }
+                case 2 : {
+                    players = res.getStringArray(R.array.team_two);
+                }
+                case 3 : {
+                    players = res.getStringArray(R.array.team_three);
+                }
+                case 4 : {
+                    players = res.getStringArray(R.array.team_four);
+                }
+                case 5 : {
+                    players = res.getStringArray(R.array.team_five);
+                }
+                case 6 : {
+                    players = res.getStringArray(R.array.team_six);
+                }
+            }
+
+            if (players != null) {
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, players);
+                setListAdapter(adapter);
+            }
+
+        }
     }
 
     @Override
