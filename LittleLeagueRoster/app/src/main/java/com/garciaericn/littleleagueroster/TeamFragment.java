@@ -3,9 +3,6 @@ package com.garciaericn.littleleagueroster;
 import android.app.ListFragment;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 /**
@@ -28,7 +25,7 @@ public class TeamFragment extends ListFragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public TeamFragment newInstance(int sectionNumber) {
+    public static TeamFragment newInstance(int sectionNumber) {
 
         TeamFragment fragment = new TeamFragment();
         Bundle args = new Bundle();
@@ -75,10 +72,10 @@ public class TeamFragment extends ListFragment {
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_roster, container, false);
-        return rootView;
-    }
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        View rootView = inflater.inflate(R.layout.fragment_roster, container, false);
+//        return rootView;
+//    }
 }
