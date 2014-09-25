@@ -39,28 +39,38 @@ public class TeamFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
 
         Resources res = getResources();
+        Bundle b = getArguments();
 
-        if (savedInstanceState != null  && savedInstanceState.containsKey(ARG_SECTION_NUMBER)) {
-            Bundle b = getArguments();
+        if (b != null) {
+//            Bundle b = getArguments();
             int sectionNumber = b.getInt(ARG_SECTION_NUMBER);
             switch (sectionNumber) {
                 case 1 : {
                     players = res.getStringArray(R.array.team_one);
+                    break;
                 }
                 case 2 : {
                     players = res.getStringArray(R.array.team_two);
+                    break;
                 }
                 case 3 : {
                     players = res.getStringArray(R.array.team_three);
+                    break;
                 }
                 case 4 : {
                     players = res.getStringArray(R.array.team_four);
+                    break;
                 }
                 case 5 : {
                     players = res.getStringArray(R.array.team_five);
+                    break;
                 }
                 case 6 : {
                     players = res.getStringArray(R.array.team_six);
+                    break;
+                }
+                default: {
+                    players = null;
                 }
             }
 
@@ -71,11 +81,4 @@ public class TeamFragment extends ListFragment {
 
         }
     }
-
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        View rootView = inflater.inflate(R.layout.fragment_roster, container, false);
-//        return rootView;
-//    }
 }
