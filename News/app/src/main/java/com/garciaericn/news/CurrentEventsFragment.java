@@ -15,6 +15,9 @@ public class CurrentEventsFragment extends Fragment {
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
 
+    public CurrentEventsFragment() {
+    }
+
     /**
      * Returns a new instance of this fragment for the given section
      * number.

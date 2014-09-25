@@ -19,6 +19,9 @@ public class FeatureFragment extends Fragment {
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
 
+    public FeatureFragment() {
+    }
+
     /**
      * Returns a new instance of this fragment for the given section
      * number.
@@ -29,9 +32,6 @@ public class FeatureFragment extends Fragment {
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public FeatureFragment() {
     }
 
     @Override
