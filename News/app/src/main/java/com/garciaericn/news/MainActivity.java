@@ -53,12 +53,14 @@ public class MainActivity extends Activity
                         .beginTransaction()
                         .replace(R.id.container, CurrentEventsFragment.newInstance(position + 1))
                         .commit();
+                break;
             }
             case 2 : {
                 getFragmentManager()
                         .beginTransaction()
                         .replace(R.id.container, GalleryFragment.newInstance(position + 1))
                         .commit();
+                break;
             }
         }
     }

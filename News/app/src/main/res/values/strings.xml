@@ -12,4 +12,16 @@
     <string name="feature_body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, cumque quia. Dicta blanditiis, a rem, obcaecati, repellat suscipit quidem perspiciatis tempora consequuntur illo similique id neque! Consectetur temporibus aut dignissimos a magnam dolorem nihil possimus adipisci! Iste expedita velit modi facere illum, qui nemo, numquam ex, ipsa eaque ab nam!</string>
     <string name="feature_heading">Breaking News</string>
 
+    <string-array name="current_events">
+        <item>Event 1</item>
+        <item>Event 2</item>
+        <item>Event 3</item>
+        <item>Event 4</item>
+        <item>Event 5</item>
+        <item>Event 6</item>
+        <item>Event 7</item>
+        <item>Event 8</item>
+        <item>Event 9</item>
+    </string-array>
+
 </resources>
