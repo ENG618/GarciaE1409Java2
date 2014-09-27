@@ -144,6 +144,16 @@ public class WeatherActivity extends Activity
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
+
+            switch (position) {
+                case 0 : {
+
+                    break;
+                }
+            }
+
+
+
             return PlaceholderFragment.newInstance(position + 1);
         }
 
@@ -236,13 +246,8 @@ public class WeatherActivity extends Activity
         // Format: http://api.wunderground.com/api/88e112815576ce6e/REQUEST_TYPE/q/FL/Orlando.json
 
         // Construct forecast string
-        StringBuilder builder = new StringBuilder();
 
-        builder.append("http://api.wunderground.com/api/88e112815576ce6e/");
-        builder.append(requestType);
-        builder.append("/q/FL/Orlando.json");
-
-        forecastURL = String.valueOf(builder);
+        forecastURL = "http://api.wunderground.com/api/88e112815576ce6e/" + requestType + "/q/FL/Orlando.json";
 
         return forecastURL;
     }
