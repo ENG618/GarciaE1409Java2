@@ -42,13 +42,13 @@ public class WeatherParser {
     private static final String FCTTIME = "FCTTIME";
 
 
-    private WeatherParser weatherParser;
-    private String JSONString;
+    private static WeatherParser weatherParser;
+    private static String JSONString;
 
     public WeatherParser(){
     }
 
-    public WeatherParser newInstance(String data) {
+    public static WeatherParser newInstance(String data) {
         JSONString = data;
         if (weatherParser == null) {
             weatherParser = new WeatherParser();
@@ -56,7 +56,7 @@ public class WeatherParser {
         return weatherParser;
     }
 
-    public HashMap<String, String> parseDataForType(String requestType) {
+    public HashMap<String, CurrentWeather> parseDataForType(String requestType) {
 
 
         if (requestType.equals(FORECAST)) {

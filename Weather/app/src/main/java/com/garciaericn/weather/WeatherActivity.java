@@ -147,14 +147,14 @@ public class WeatherActivity extends Activity
 
             switch (position) {
                 case 0 : {
-
-                    break;
+                    return CurrentWeatherFragment.newInstance(position + 1);
+                }case 1 : {
+                    return CurrentWeatherFragment.newInstance(position + 1);
+                }case 2 : {
+                    return CurrentWeatherFragment.newInstance(position + 1);
                 }
+                default: return null;
             }
-
-
-
-            return PlaceholderFragment.newInstance(position + 1);
         }
 
         @Override
@@ -244,9 +244,7 @@ public class WeatherActivity extends Activity
         Log.i(TAG, "getForecastURL entered");
 
         // Format: http://api.wunderground.com/api/88e112815576ce6e/REQUEST_TYPE/q/FL/Orlando.json
-
         // Construct forecast string
-
         forecastURL = "http://api.wunderground.com/api/88e112815576ce6e/" + requestType + "/q/FL/Orlando.json";
 
         return forecastURL;
