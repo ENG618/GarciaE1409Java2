@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,6 +32,7 @@ public class MemoryListFragment extends ListFragment {
     private MemoryListFragmentCallback activity;
     private MemoryAdapter adapter;
     private ActionMode actionMode;
+    private int selectedMemory = -1;
 
     public interface MemoryListFragmentCallback {
         public void onItemSelected(Memory memory);
@@ -122,7 +124,10 @@ public class MemoryListFragment extends ListFragment {
     private ActionMode.Callback actionModeCallback = new ActionMode.Callback() {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            return false;
+            // Inflate menu from resources
+            MenuInflater menuInflater = mode.getMenuInflater();
+            menuInflater.inflate(R.menu.memory_cab, menu);
+            return true;
         }
 
         @Override
