@@ -1,26 +1,41 @@
 package com.garciaericn.weather;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
 import java.util.Locale;
 
 import android.app.Activity;
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Toast;
+
+import com.garciaericn.weather.fragments.CurrentWeatherFragment;
+import com.garciaericn.weather.objects.CurrentWeather;
 
 
-public class WeatherActivity extends Activity implements ActionBar.TabListener {
+public class WeatherActivity extends Activity
+        implements ActionBar.TabListener, CurrentWeatherFragment.ForecastFragmentCallback {
 
+    private static final String TAG = "WeatherActivity.TAG";
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -35,6 +50,10 @@ public class WeatherActivity extends Activity implements ActionBar.TabListener {
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
+    private String forecastURL;
+    private String returnedCurrentWeather;
+    private String returnedFoewcastWeather;
+    private String returnedHourlyWeather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,37 +168,181 @@ public class WeatherActivity extends Activity implements ActionBar.TabListener {
         }
     }
 
+//    /**
+//     * A placeholder fragment containing a simple view.
+//     */
+//    public static class PlaceholderFragment extends Fragment {
+//        /**
+//         * The fragment argument representing the section number for this
+//         * fragment.
+//         */
+//        private static final String ARG_SECTION_NUMBER = "section_number";
+//
+//        /**
+//         * Returns a new instance of this fragment for the given section
+//         * number.
+//         */
+//        public static PlaceholderFragment newInstance(int sectionNumber) {
+//            PlaceholderFragment fragment = new PlaceholderFragment();
+//            Bundle args = new Bundle();
+//            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+//            fragment.setArguments(args);
+//            return fragment;
+//        }
+//
+//        public PlaceholderFragment() {
+//        }
+//
+//        @Override
+//        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                                 Bundle savedInstanceState) {
+//            View rootView = inflater.inflate(R.layout.fragment_current_weather, container, false);
+//            return rootView;
+//        }
+//    }
+
     /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
+     * Data getter for Weather Underground api
+     * */
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
+    public boolean checkNetworkStatus(){
+        Log.i(TAG, "checkNetworkStatus entered");
+        boolean isConnected = false;
+
+        //Create connectivity manager
+        ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        // Obtain status
+        NetworkInfo ni = cm.getActiveNetworkInfo();
+        // Check validity & if connected
+        if (ni != null && ni.isConnected()) {
+            Log.i(TAG, "Connection type: " + ni.getTypeName());
+            Toast.makeText(this, "Connected to: " + ni.getTypeName(), Toast.LENGTH_SHORT).show();
+            isConnected = true;
         }
-
-        public PlaceholderFragment() {
+        else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("To get updated information please connect your device to the internet")
+                    .setTitle("No internet Connection")
+                    .create()
+                    .show();
         }
+        return isConnected;
+    }
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_weather, container, false);
-            return rootView;
+    public String getForecastURL(String requestType) {
+        // Log message
+        Log.i(TAG, "getForecastURL entered");
+
+        // Format: http://api.wunderground.com/api/88e112815576ce6e/REQUEST_TYPE/q/FL/Orlando.json
+
+        // Construct forecast string
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("http://api.wunderground.com/api/88e112815576ce6e/");
+        builder.append(requestType);
+        builder.append("/q/FL/Orlando.json");
+
+        forecastURL = String.valueOf(builder);
+
+        return forecastURL;
+    }
+
+    // Search method
+    public void searchWeatherUnderground(String stringURL){
+        Log.i(TAG, "searchWeatherUnderground Entered");
+
+        // Check if connected to internet
+        if (checkNetworkStatus()){
+
+            // Preform search
+            getData data = new getData();
+            data.execute(stringURL);
         }
     }
 
-}
+    // Fetch URL
+    private static String getResponse(URL url) {
+        // Log message
+        Log.i(TAG, "getResponse entered");
+
+        String response;
+        try {
+            //noinspection UnusedAssignment
+            response = null;
+            URLConnection conn = url.openConnection();
+            BufferedInputStream bin = new BufferedInputStream(conn.getInputStream());
+            byte[] contextByte = new byte[1024];
+            //noinspection UnusedAssignment
+            int byteRead = 0;
+            //StringBuffer was producing an error so I switched it to String Builder
+            StringBuilder responseBuilder = new StringBuilder();
+
+
+            while ((byteRead = bin.read(contextByte)) != -1) {
+                response = new String(contextByte, 0, byteRead);
+                responseBuilder.append(response);
+            }
+            response = responseBuilder.toString();
+            Log.i(TAG, "URL Response: " + response);
+        } catch (IOException e) {
+            response = "Something isn't right.  We didn't receive a response";
+            Log.e(TAG, "Something went wrong", e);
+        }
+
+        return response;
+    }
+
+    // Obtain data from api
+    private class getData extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            // Declare local variable response string
+            String responseString;
+
+            try { // Try URL
+                URL url = new URL(forecastURL);
+                responseString = getResponse(url);
+            } catch (Exception e) { // If error show response string and error
+                responseString = "Something isn't right";
+                Log.e(TAG, "ERROR: ", e);
+            }
+            return responseString;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            Log.i(TAG, "onPostExecute entered");
+            Log.i(TAG, "Post Execute String: " + s);
+
+            // TODO: Parse and send to fragments
+
+//            // Send JSON string to parsing method
+//            List<CurrentWeather> forecastList = JSONParser.parseForecast(s);
+//            Log.i(TAG, "The fully parsed json toString(): " + forecastList.toString());
+//
+//            // Populate weather list fragment into container
+//            DaysListFragment listFragment = DaysListFragment.newInstance(forecastList);
+//
+//            // Create FragmentManager and Transaction
+//            getFragmentManager()
+//                    .beginTransaction()
+//                    .replace(R.id.days_list_fragment, listFragment, DaysListFragment.TAG)
+//                    .commit();
+
+            super.onPostExecute(s);
+        }
+    }
+
+    /**
+     *
+     * Callbacks interfaces
+     * */
+
+    @Override
+    public List<CurrentWeather> getCurrentWeather(String requestType) {
+        searchWeatherUnderground(getForecastURL("conditions"));
+
+
+        return null;
+    } }

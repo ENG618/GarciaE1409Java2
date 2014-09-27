@@ -2,11 +2,16 @@ package com.garciaericn.weather;
 
 import android.util.Log;
 
+import com.garciaericn.weather.objects.CurrentWeather;
+import com.garciaericn.weather.objects.ForecastWeather;
+import com.garciaericn.weather.objects.HourlyWeather;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Full Sail University
@@ -37,14 +42,18 @@ public class WeatherParser {
     private static final String FCTTIME = "FCTTIME";
 
 
+    private WeatherParser weatherParser;
     private String JSONString;
 
     public WeatherParser(){
     }
 
-    public HashMap<String, String> newInstance(String data, String requestType) {
+    public WeatherParser newInstance(String data) {
         JSONString = data;
-        return parseDataForType(requestType);
+        if (weatherParser == null) {
+            weatherParser = new WeatherParser();
+        }
+        return weatherParser;
     }
 
     public HashMap<String, String> parseDataForType(String requestType) {
@@ -60,7 +69,7 @@ public class WeatherParser {
         return null;
     }
 
-    private HashMap<String, String> parseForecast() {
+    private HashMap<String, ForecastWeather> parseForecast() {
         Log.i(TAG, "parseForecast entered");
 
         HashMap<String, String> forecastMap = new HashMap<String, String>();
@@ -89,7 +98,7 @@ public class WeatherParser {
         return forecastMap;
     }
 
-    private HashMap<String,String> parseCurrent() {
+    private HashMap<String,CurrentWeather> parseCurrent() {
         Log.i(TAG, "parseCurrent entered");
 
         HashMap<String, String> currentMap = new HashMap<String, String>();
@@ -109,7 +118,7 @@ public class WeatherParser {
         return currentMap;
     }
 
-    private HashMap<String, String> parseHourly() {
+    private HashMap<String, HourlyWeather> parseHourly() {
         Log.i(TAG, "parseHourly entered");
 
         HashMap<String, String> hourlyMap = new HashMap<String, String>();
