@@ -15,4 +15,8 @@ Week 3:
 * See MemoryVault.apk
 
 Week 4:
-* To be completed on 9/25
+* See News.apk
+* LittleLeague.apk
+* MemoryVault.apk
+* Memory Vault Project folder
+* Weather Project folder
