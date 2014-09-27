@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.garciaericn.memoryvault.R;
 import com.garciaericn.memoryvault.data.Memory;
@@ -76,6 +77,8 @@ public class MemoryListFragment extends ListFragment {
                 }
 
                 actionMode = getActivity().startActionMode(actionModeCallback);
+
+                Toast.makeText(getActivity(), "Long click working", Toast.LENGTH_SHORT).show();
 
                 return false;
             }
