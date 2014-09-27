@@ -62,9 +62,8 @@ public class MemoryListFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
         Log.i(TAG, "onActivityCreated");
 
-        MemoryManager mgr = new MemoryManager();
-        mgr = mgr.newInstance(getActivity());
-        memoryList = mgr.getMemories(getActivity());
+//        MemoryManager mgr = MemoryManager.newInstance(getActivity());
+        memoryList = MemoryManager.getMemories(getActivity());
 
         if (memoryList != null) {
             adapter = new MemoryAdapter(getActivity(), R.layout.memory_list_item, memoryList);
@@ -118,8 +117,8 @@ public class MemoryListFragment extends ListFragment {
     }
 
     private void updateList() {
-        MemoryManager mgr = new MemoryManager();
-        memoryList = mgr.getMemories(getActivity());
+//        MemoryManager mgr = MemoryManager.newInstance(getActivity());
+        memoryList = MemoryManager.getMemories(getActivity());
     }
 
     // Contextual Actionbar Callback

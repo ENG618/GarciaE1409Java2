@@ -15,10 +15,6 @@ import com.garciaericn.memoryvault.data.MemoryManager;
 import com.garciaericn.memoryvault.fragments.MemoryListFragment;
 import com.garciaericn.memoryvault.fragments.SettingsFragment;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 public class MemoryListActivity extends Activity
     implements MemoryListFragment.MemoryListFragmentCallback{
 
@@ -29,7 +25,7 @@ public class MemoryListActivity extends Activity
 
     private Context context;
     private SharedPreferences settings;
-    private MemoryManager manager;
+//    private MemoryManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +36,7 @@ public class MemoryListActivity extends Activity
         // Cache context, preferences, & manager
         context = this;
         settings = PreferenceManager.getDefaultSharedPreferences(this);
-        manager = new MemoryManager();
-        manager.newInstance(this);
+//        manager = MemoryManager.newInstance(this);
 
         // Check if first launch
         checkFirstLaunch();
@@ -86,13 +81,13 @@ public class MemoryListActivity extends Activity
 
     private void loadList(){
         // Obtain HasMap of memories from manager
-        HashMap map = manager.getMemoryMap();
+       // HashMap map = (HashMap) MemoryManager.newInstance(this).getMemories(this);//manager.getMemoryMap();
 
         // Create
-        List<Memory> memoryList = new ArrayList<Memory>(map.values());
+//        List<Memory> memoryList = new ArrayList<Memory>(MemoryManager.getMemories(context));
 
         // Create instance of Memory list fragment
-        MemoryListFragment frag = MemoryListFragment.newInstance(memoryList);
+        MemoryListFragment frag = MemoryListFragment.newInstance(MemoryManager.getMemories(context));
 
         getFragmentManager()
                 .beginTransaction()
@@ -121,10 +116,10 @@ public class MemoryListActivity extends Activity
     private void loadDummyMemories() {
         Log.i(TAG, "loadDummyMemories entered");
 
-        manager.addMemory(new Memory("Project 3", 1, "Home", "Coming along pretty good so far"));
-        manager.addMemory(new Memory("Family Vacation", 4, "Ruskin, FL", "Had some well deserved quality time with the family"));
-        manager.addMemory(new Memory("Birthday", 25, "Party house", "HAPPY BIRTHDAY!!"));
-        manager.addMemory(new Memory("Anniversary", 2, "Romantic restaurant", "Always fun spending time with my wife"));
+        MemoryManager.addMemory(new Memory("Project 3", 1, "Home", "Coming along pretty good so far"));
+        MemoryManager.addMemory(new Memory("Family Vacation", 4, "Ruskin, FL", "Had some well deserved quality time with the family"));
+        MemoryManager.addMemory(new Memory("Birthday", 25, "Party house", "HAPPY BIRTHDAY!!"));
+        MemoryManager.addMemory(new Memory("Anniversary", 2, "Romantic restaurant", "Always fun spending time with my wife"));
     }
 
     @Override

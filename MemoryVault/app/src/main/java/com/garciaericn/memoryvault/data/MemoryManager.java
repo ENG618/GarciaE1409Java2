@@ -25,11 +25,22 @@ public class MemoryManager {
 
     private static final String TAG = "MemoryManager.TAG";
     private static final String FILENAME = "Memories";
-    private Context context;
-    private MemoryManager mgr;
-    private List<Memory> memoriesList;
+    private static Context mContext;
+    private static MemoryManager mgr;
+    private static List<Memory> memoriesList;
 
-    public HashMap <String, Memory> memories;
+    public static HashMap <String, Memory> memories;
+
+//    public class testSingleton {
+//        private static testSingleton ourInstance = new testSingleton();
+//
+//        public static testSingleton getInstance() {
+//            return ourInstance;
+//        }
+//
+//        private testSingleton() {
+//        }
+//    }
 
 
     // Initializes memories HashMap if null
@@ -37,14 +48,14 @@ public class MemoryManager {
         Log.i(TAG, "MemoryManager Created");
     }
 
-    public MemoryManager newInstance(Context context) {
+    public static MemoryManager newInstance(Context context) {
         Log.i(TAG, "newInstance entered");
 
         if (mgr == null) {
             mgr = new MemoryManager();
         }
 
-        this.context = context;
+        mContext = context;
 
         if (checkFile(context, FILENAME)) {
             readFromDisk(FILENAME);
@@ -67,7 +78,7 @@ public class MemoryManager {
     }
 
     // Adds given memory
-    public void addMemory(Memory memory) {
+    public static void addMemory(Memory memory) {
         Log.i(TAG, "addMemory entered");
         memories.put(memory.getMemoryKey(), memory);
         writeToDisk(memories);
@@ -80,7 +91,7 @@ public class MemoryManager {
         writeToDisk(memories);
     }
 
-    private Boolean checkFile (Context context, String fileName) {
+    private static Boolean checkFile(Context context, String fileName) {
         Log.i(TAG, "checkFile entered");
         // Store data in "protected" directory
         File external = context.getExternalFilesDir(null);
@@ -88,10 +99,10 @@ public class MemoryManager {
         return file.exists();
     }
 
-    public void writeToDisk(HashMap<String, Memory> memories) {
+    public static void writeToDisk(HashMap<String, Memory> memories) {
         Log.i(TAG, "writeToDisk entered");
 
-        File external = context.getExternalFilesDir(null);
+        File external = mContext.getExternalFilesDir(null);
         File file = new File(external, FILENAME);
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file);
@@ -106,11 +117,11 @@ public class MemoryManager {
         }
     }
 
-    private void readFromDisk(String fileName) {
+    private static void readFromDisk(String fileName) {
         Log.i(TAG, "readFromFile entered");
 
-        if (checkFile(context, FILENAME)) {
-            File external = context.getExternalFilesDir(null);
+        if (checkFile(mContext, FILENAME)) {
+            File external = mContext.getExternalFilesDir(null);
             File file = new File(external, fileName);
 
             try {
@@ -133,8 +144,8 @@ public class MemoryManager {
         }
     }
 
-    public List<Memory> getMemories(Context context) {
-        this.context = context;
+    public static List<Memory> getMemories(Context context) {
+        mContext = context;
         // Read from disk to get most updated info
         readFromDisk(FILENAME);
 //        if (memoriesList == null) {
