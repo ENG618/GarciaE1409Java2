@@ -8,6 +8,7 @@ import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.garciaericn.memoryvault.R;
@@ -67,12 +68,19 @@ public class MemoryListFragment extends ListFragment {
             setListAdapter(adapter);
         }
 
-        getListView().setOnLongClickListener(new View.OnLongClickListener() {
+        AdapterView.OnItemLongClickListener longClickListener = new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onLongClick(View v) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                if (actionMode != null) {
+                    return false;
+                }
+
+                actionMode = getActivity().startActionMode(actionModeCallback);
+
                 return false;
             }
-        });
+        };
+        getListView().setOnItemLongClickListener(longClickListener);
     }
 
     @Override
@@ -128,5 +136,5 @@ public class MemoryListFragment extends ListFragment {
         public void onDestroyActionMode(ActionMode mode) {
 
         }
-    }
+    };
 }
