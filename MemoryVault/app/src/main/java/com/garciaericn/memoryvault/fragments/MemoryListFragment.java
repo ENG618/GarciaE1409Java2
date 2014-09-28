@@ -82,7 +82,7 @@ public class MemoryListFragment extends ListFragment {
 
                 actionMode = getActivity().startActionMode(actionModeCallback);
 
-                return false;
+                return true;
             }
         };
         getListView().setOnItemLongClickListener(longClickListener);

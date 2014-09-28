@@ -136,11 +136,7 @@ public class MemoryManager {
         mContext = context;
         // Read from disk to get most updated info
         readFromDisk(FILENAME);
-//        if (memoriesList == null) {
-            memoriesList = new ArrayList<Memory>(memories.values());
-//        }
-//        memoriesList = (List<Memory>) memories.values();
-        // Create list of values for return
+        memoriesList = new ArrayList<Memory>(memories.values());
         return memoriesList;
     }
 }
