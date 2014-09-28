@@ -7,7 +7,12 @@ package com.garciaericn.weather.objects;
  */
 public class ForecastWeather {
 
-    public ForecastWeather(){
+    // Privet fields
+    private String dayOfWeek;
+    private String condition;
 
+    public ForecastWeather(String dayOfWeek, String condition) {
+        this.dayOfWeek = dayOfWeek;
+        this.condition = condition;
     }
 }

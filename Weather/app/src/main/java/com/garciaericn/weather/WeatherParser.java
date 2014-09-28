@@ -10,8 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Full Sail University
@@ -56,23 +56,10 @@ public class WeatherParser {
         return weatherParser;
     }
 
-    public HashMap<String, CurrentWeather> parseDataForType(String requestType) {
-
-
-        if (requestType.equals(FORECAST)) {
-            return parseForecast();
-        } else if (requestType.equals(CURRENT)) {
-            return parseCurrent();
-        } else if (requestType.equals(HOURLY)) {
-            return parseHourly();
-        }
-        return null;
-    }
-
-    private HashMap<String, ForecastWeather> parseForecast() {
+    private ArrayList<ForecastWeather> parseForecast() {
         Log.i(TAG, "parseForecast entered");
 
-        HashMap<String, String> forecastMap = new HashMap<String, String>();
+        ArrayList<ForecastWeather> forecastArray = new ArrayList<ForecastWeather>();
         try {
             JSONObject data = new JSONObject(JSONString);
 
@@ -88,34 +75,39 @@ public class WeatherParser {
                 String dayOfWeek = forecastDay.getJSONObject(i).getString(TITLE);
                 String condition = forecastDay.getJSONObject(i).getString(FCTTEXT);
 
-                forecast.put(TITLE, dayOfWeek);
-                forecast.put(FCTTEXT, condition);
+                ForecastWeather forecastWeather = new ForecastWeather(dayOfWeek, condition);
+                forecastArray.add(forecastWeather);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return forecastMap;
+        return forecastArray;
     }
 
-    private HashMap<String,CurrentWeather> parseCurrent() {
+    private CurrentWeather parseCurrent() {
         Log.i(TAG, "parseCurrent entered");
 
-        HashMap<String, String> currentMap = new HashMap<String, String>();
+        CurrentWeather currentWeather;
+
         try {
             JSONObject data = new JSONObject(JSONString);
 
             JSONObject observation = new JSONObject(data.getJSONObject(OBSERVATION).toString());
             JSONObject location = new JSONObject(observation.getJSONObject("observation_location").toString());
 
-            currentMap.put(CITY, location.getString("city"));
-            currentMap.put(WEATHER, observation.getString("weather"));
-            currentMap.put(TEMP, String.valueOf(observation.getInt("temp_f")));
+            String city = location.getString("city");
+            String weather = observation.getString("weather");
+            String temp = String.valueOf(observation.getInt("temp_f"));
+
+            currentWeather = new CurrentWeather(city, weather, temp);
+
+
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return currentMap;
+        return currentWeather;
     }
 
     private HashMap<String, HourlyWeather> parseHourly() {
