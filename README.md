@@ -20,3 +20,11 @@ Week 4:
 * MemoryVault.apk
 * Memory Vault Project folder
 * Weather Project folder
+
+
+Updated Week 4:
+* See Weather.apk
+* Weather Project Folder
+* MemoryVault.apk (updated)
+* MemoryVault Project Folder
+* [Update Video](http://youtu.be/f1mLOFWWHmE)
