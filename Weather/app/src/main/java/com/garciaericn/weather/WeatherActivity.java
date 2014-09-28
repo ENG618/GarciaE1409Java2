@@ -21,19 +21,18 @@ import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.garciaericn.weather.fragments.CurrentWeatherFragment;
+import com.garciaericn.weather.fragments.ForecastWeatherFragment;
+import com.garciaericn.weather.fragments.HourlyWeatherFragment;
 import com.garciaericn.weather.objects.CurrentWeather;
 
 
 public class WeatherActivity extends Activity
-        implements ActionBar.TabListener, CurrentWeatherFragment.ForecastFragmentCallback {
+        implements ActionBar.TabListener, CurrentWeatherFragment.CurrentWeatherFragmentCallback {
 
     private static final String TAG = "WeatherActivity.TAG";
     /**
@@ -149,9 +148,9 @@ public class WeatherActivity extends Activity
                 case 0 : {
                     return CurrentWeatherFragment.newInstance(position + 1);
                 }case 1 : {
-                    return CurrentWeatherFragment.newInstance(position + 1);
+                    return HourlyWeatherFragment.newInstance(position + 1);
                 }case 2 : {
-                    return CurrentWeatherFragment.newInstance(position + 1);
+                    return ForecastWeatherFragment.newInstance(position + 1);
                 }
                 default: return null;
             }
@@ -320,19 +319,6 @@ public class WeatherActivity extends Activity
 
             // TODO: Parse and send to fragments
 
-//            // Send JSON string to parsing method
-//            List<CurrentWeather> forecastList = JSONParser.parseForecast(s);
-//            Log.i(TAG, "The fully parsed json toString(): " + forecastList.toString());
-//
-//            // Populate weather list fragment into container
-//            DaysListFragment listFragment = DaysListFragment.newInstance(forecastList);
-//
-//            // Create FragmentManager and Transaction
-//            getFragmentManager()
-//                    .beginTransaction()
-//                    .replace(R.id.days_list_fragment, listFragment, DaysListFragment.TAG)
-//                    .commit();
-
             super.onPostExecute(s);
         }
     }
@@ -345,7 +331,5 @@ public class WeatherActivity extends Activity
     @Override
     public List<CurrentWeather> getCurrentWeather(String requestType) {
         searchWeatherUnderground(getForecastURL("conditions"));
-
-
         return null;
     } }

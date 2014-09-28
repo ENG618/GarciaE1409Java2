@@ -1,8 +1,8 @@
 package com.garciaericn.weather.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +20,11 @@ import java.util.List;
 public class CurrentWeatherFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
+    private static final String REQUEST_TYPE = "conditions";
+    private Activity activity;
 
     // Callback
-    public interface ForecastFragmentCallback{
+    public interface CurrentWeatherFragmentCallback{
         public List<CurrentWeather> getCurrentWeather(String requestType);
     }
 
@@ -34,10 +36,16 @@ public class CurrentWeatherFragment extends Fragment {
         return fragment;
     }
 
-    @Nullable
+    @Override
+    public void onAttach(Activity activity) {
+        this.activity = activity;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_current_weather, container, false);
+
+        rootView.findViewById(R.id.tempTV);
         return rootView;
     }
 }

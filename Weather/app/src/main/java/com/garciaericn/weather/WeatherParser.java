@@ -11,7 +11,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Full Sail University
@@ -23,8 +22,6 @@ public class WeatherParser {
 
     // Constants for each type of data to parse
     public static final String FORECAST = "forecast";
-    public static final String CURRENT = "current_observation";
-    public static final String HOURLY = "hourly_forecast";
 
     // Constants for forecast
     public static final String TITLE = "title";
@@ -33,9 +30,6 @@ public class WeatherParser {
     // Constants for current
     private static final String OBSERVATION = "current_observation";
     private static final String FORECASTTXT = "txt_forecast";
-    private static final String CITY = "city";
-    private static final String WEATHER = "weather";
-    private static final String TEMP = "temp";
 
     // Constants for hourly
     private static final String HOURLYFORECAST = "hourly_forecast";
@@ -88,7 +82,7 @@ public class WeatherParser {
     private CurrentWeather parseCurrent() {
         Log.i(TAG, "parseCurrent entered");
 
-        CurrentWeather currentWeather;
+        CurrentWeather currentWeather = null;
 
         try {
             JSONObject data = new JSONObject(JSONString);
@@ -110,10 +104,10 @@ public class WeatherParser {
         return currentWeather;
     }
 
-    private HashMap<String, HourlyWeather> parseHourly() {
+    private ArrayList<HourlyWeather> parseHourly() {
         Log.i(TAG, "parseHourly entered");
 
-        HashMap<String, String> hourlyMap = new HashMap<String, String>();
+        ArrayList<HourlyWeather> hourlyArray = new ArrayList<HourlyWeather>();
         try {
             JSONObject data = new JSONObject(JSONString);
 
@@ -131,6 +125,6 @@ public class WeatherParser {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return hourlyMap;
+        return hourlyArray;
     }
 }
