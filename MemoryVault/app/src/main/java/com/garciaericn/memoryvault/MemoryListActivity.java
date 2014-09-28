@@ -124,13 +124,12 @@ public class MemoryListActivity extends Activity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == NEW_MEM_CODE && resultCode == RESULT_OK) {
-            // TODO: force refresh with notifyDataSetChanged()
-//            refresh();
+            loadList();
         }
 
         if (requestCode == REQUESTCODE  && resultCode == MemoryDetailsActivity.DISCARDCODE) {
             Log.i(TAG, "Memory was deleted");
-
+            loadList();
         }
     }
 
