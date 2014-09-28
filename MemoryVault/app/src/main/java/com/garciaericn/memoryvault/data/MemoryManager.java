@@ -31,18 +31,6 @@ public class MemoryManager {
 
     public static HashMap <String, Memory> memories;
 
-//    public class testSingleton {
-//        private static testSingleton ourInstance = new testSingleton();
-//
-//        public static testSingleton getInstance() {
-//            return ourInstance;
-//        }
-//
-//        private testSingleton() {
-//        }
-//    }
-
-
     // Initializes memories HashMap if null
     public MemoryManager() {
         Log.i(TAG, "MemoryManager Created");

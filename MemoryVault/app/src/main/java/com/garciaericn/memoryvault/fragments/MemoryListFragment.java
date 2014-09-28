@@ -138,6 +138,7 @@ public class MemoryListFragment extends ListFragment {
                     MemoryManager mgr = MemoryManager.getInstance(getActivity());
                     mgr.removeMemory(adapter.getItem(selectedMemory));
                     Toast.makeText(getActivity(), memoryList.get(selectedMemory).getEventName() + "deleted", Toast.LENGTH_SHORT).show();
+                    activity.refreshList();
                     mode.finish();
                     return true;
                 }
