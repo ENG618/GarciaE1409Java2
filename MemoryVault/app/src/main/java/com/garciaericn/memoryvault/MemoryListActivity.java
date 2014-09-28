@@ -16,7 +16,7 @@ import com.garciaericn.memoryvault.fragments.MemoryListFragment;
 import com.garciaericn.memoryvault.fragments.SettingsFragment;
 
 public class MemoryListActivity extends Activity
-    implements MemoryListFragment.MemoryListFragmentCallback{
+    implements MemoryListFragment.MemoryListFragmentCallback {
 
     public static final String TAG = "MemoryListActivity.TAG";
     private static final int NEW_MEM_CODE = 1234;

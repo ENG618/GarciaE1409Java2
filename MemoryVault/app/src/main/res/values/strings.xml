@@ -20,5 +20,6 @@
     <string name="action_share">Share</string>
     <string name="action_discard">Discard</string>
     <string name="action_edit">Edit</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

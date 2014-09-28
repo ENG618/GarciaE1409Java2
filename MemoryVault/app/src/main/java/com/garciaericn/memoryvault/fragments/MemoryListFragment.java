@@ -82,8 +82,6 @@ public class MemoryListFragment extends ListFragment {
 
                 actionMode = getActivity().startActionMode(actionModeCallback);
 
-//                Toast.makeText(getActivity(), "Long click working", Toast.LENGTH_SHORT).show();
-
                 return false;
             }
         };
@@ -136,7 +134,11 @@ public class MemoryListFragment extends ListFragment {
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.deleteMemoryCAB: {
-                    Toast.makeText(getActivity(), memoryList.get(selectedMemory).getEventName(), Toast.LENGTH_SHORT).show();
+                    Log.i(TAG, "deleteMemory from CAB entered");
+                    MemoryManager mgr = MemoryManager.getInstance(getActivity());
+                    mgr.removeMemory(adapter.getItem(selectedMemory));
+                    Toast.makeText(getActivity(), memoryList.get(selectedMemory).getEventName() + "deleted", Toast.LENGTH_SHORT).show();
+                    mode.finish();
                     return true;
                 }
                 default: {
