@@ -36,6 +36,7 @@ public class MemoryListFragment extends ListFragment {
 
     public interface MemoryListFragmentCallback {
         public void onItemSelected(Memory memory);
+        public void refreshList();
     }
 
     public MemoryListFragment() {
@@ -62,8 +63,8 @@ public class MemoryListFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
         Log.i(TAG, "onActivityCreated");
 
+        // Create instance of MemoryManager
         MemoryManager mgr = MemoryManager.getInstance(getActivity());
-//        memoryList = MemoryManager.getMemories(getActivity());
 
         if (memoryList != null) {
             adapter = new MemoryAdapter(getActivity(), R.layout.memory_list_item, mgr.getMemories(getActivity()));
@@ -108,18 +109,13 @@ public class MemoryListFragment extends ListFragment {
             case R.id.actions_refresh : {
                 Log.i(TAG, "Refresh from fragments");
 
-//                updateList();
+                activity.refreshList();
                 adapter.notifyDataSetChanged();
                 return true;
             }
         }
         return super.onOptionsItemSelected(item);
     }
-
-//    private void updateList() {
-//        MemoryManager mgr = MemoryManager.getInstance(getActivity());
-//        memoryList = mgr.getMemories(getActivity());
-//    }
 
     // Contextual Actionbar Callback
     private ActionMode.Callback actionModeCallback = new ActionMode.Callback() {

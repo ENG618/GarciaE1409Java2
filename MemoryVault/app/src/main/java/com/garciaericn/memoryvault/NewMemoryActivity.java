@@ -20,15 +20,11 @@ public class NewMemoryActivity extends Activity
     implements NewMemoryFragment.NewMemoryFragmentCallbacks{
 
     private static final String TAG = "NewMemoryActivity.TAG";
-//    private MemoryManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_memory);
-
-//        manager = new MemoryManager();
-//        manager.getInstance(this);
 
         if (savedInstanceState == null) { // First launch of activity (no saved state)
             Log.i(TAG, "onCreate for first launch");
@@ -78,7 +74,6 @@ public class NewMemoryActivity extends Activity
              *  return false;
              * }
              */
-            //
         }
         return super.onOptionsItemSelected(item);
     }
@@ -86,7 +81,6 @@ public class NewMemoryActivity extends Activity
     @Override
     public void addMemory(Memory newMemory) {
         MemoryManager mgr = MemoryManager.getInstance(this);
-
         mgr.addMemory(newMemory);
 
         Intent returnIntent = new Intent();

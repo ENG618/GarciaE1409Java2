@@ -25,7 +25,6 @@ public class MemoryListActivity extends Activity
 
     private Context context;
     private SharedPreferences settings;
-//    private MemoryManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +35,6 @@ public class MemoryListActivity extends Activity
         // Cache context, preferences, & manager
         context = this;
         settings = PreferenceManager.getDefaultSharedPreferences(this);
-//        manager = MemoryManager.getInstance(this);
 
         // Check if first launch
         checkFirstLaunch();
@@ -80,10 +78,7 @@ public class MemoryListActivity extends Activity
     }
 
     private void loadList(){
-        // Obtain HasMap of memories from manager
-       // HashMap map = (HashMap) MemoryManager.getInstance(this).getMemories(this);//manager.getMemoryMap();
-
-        // Create
+        // Create instance of MemoryManager
         MemoryManager mgr = MemoryManager.getInstance(context);
 
         // Create instance of Memory list fragment
@@ -116,6 +111,7 @@ public class MemoryListActivity extends Activity
     private void loadDummyMemories() {
         Log.i(TAG, "loadDummyMemories entered");
 
+        // Create instance of MemoryManager
         MemoryManager mgr = MemoryManager.getInstance(context);
 
         mgr.addMemory(new Memory("Project 3", 1, "Home", "Coming along pretty good so far"));
@@ -140,10 +136,14 @@ public class MemoryListActivity extends Activity
 
     @Override
     public void onItemSelected(Memory memory) {
-
         Bundle b = memory.toBundle();
         Intent intent = new Intent(this, MemoryDetailsActivity.class);
         intent.putExtra(MEMORYBUNDLE, b);
         startActivityForResult(intent, REQUESTCODE);
+    }
+
+    @Override
+    public void refreshList() {
+        loadList();
     }
 }
