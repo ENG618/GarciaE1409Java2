@@ -22,7 +22,7 @@ public class MemoryDetailsActivity extends Activity
     public static final String TAG = "MemoryDetailsActivity.TAG";
     public static final int DISCARDCODE = 4321;
 
-    private MemoryManager manager;
+//    private MemoryManager manager;
     private Memory memory;
 
     @Override
@@ -30,9 +30,6 @@ public class MemoryDetailsActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memory_details);
         Log.i(TAG, "onCreate entered");
-
-        manager = new MemoryManager();
-        manager.newInstance(this);
 
         if (savedInstanceState == null) {
             // Create fragment
@@ -105,7 +102,8 @@ public class MemoryDetailsActivity extends Activity
 
     @Override
     public void discardMemory(Memory discardedMemory) {
-        manager.removeMemory(discardedMemory);
+        MemoryManager mgr = MemoryManager.getInstance(this);
+        mgr.removeMemory(discardedMemory);
 
         Intent returnIntent = new Intent();
         setResult(DISCARDCODE, returnIntent);

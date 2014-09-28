@@ -48,8 +48,8 @@ public class MemoryManager {
         Log.i(TAG, "MemoryManager Created");
     }
 
-    public static MemoryManager newInstance(Context context) {
-        Log.i(TAG, "newInstance entered");
+    public static MemoryManager getInstance(Context context) {
+        Log.i(TAG, "getInstance entered");
 
         if (mgr == null) {
             mgr = new MemoryManager();
@@ -78,7 +78,7 @@ public class MemoryManager {
     }
 
     // Adds given memory
-    public static void addMemory(Memory memory) {
+    public void addMemory(Memory memory) {
         Log.i(TAG, "addMemory entered");
         memories.put(memory.getMemoryKey(), memory);
         writeToDisk(memories);
@@ -144,7 +144,7 @@ public class MemoryManager {
         }
     }
 
-    public static List<Memory> getMemories(Context context) {
+    public List<Memory> getMemories(Context context) {
         mContext = context;
         // Read from disk to get most updated info
         readFromDisk(FILENAME);

@@ -28,7 +28,7 @@ public class NewMemoryActivity extends Activity
         setContentView(R.layout.activity_new_memory);
 
 //        manager = new MemoryManager();
-//        manager.newInstance(this);
+//        manager.getInstance(this);
 
         if (savedInstanceState == null) { // First launch of activity (no saved state)
             Log.i(TAG, "onCreate for first launch");
@@ -85,7 +85,9 @@ public class NewMemoryActivity extends Activity
 
     @Override
     public void addMemory(Memory newMemory) {
-        MemoryManager.addMemory(newMemory);
+        MemoryManager mgr = MemoryManager.getInstance(this);
+
+        mgr.addMemory(newMemory);
 
         Intent returnIntent = new Intent();
         setResult(RESULT_OK, returnIntent);

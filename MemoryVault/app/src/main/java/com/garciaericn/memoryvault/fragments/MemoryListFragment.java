@@ -50,7 +50,7 @@ public class MemoryListFragment extends ListFragment {
     }
 
     public static MemoryListFragment newInstance(List<Memory> memoryArray) {
-        Log.i(TAG, "newInstance entered");
+        Log.i(TAG, "getInstance entered");
         MemoryListFragment frag = new MemoryListFragment();
         memoryList = memoryArray;
 
@@ -62,11 +62,11 @@ public class MemoryListFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
         Log.i(TAG, "onActivityCreated");
 
-//        MemoryManager mgr = MemoryManager.newInstance(getActivity());
-        memoryList = MemoryManager.getMemories(getActivity());
+        MemoryManager mgr = MemoryManager.getInstance(getActivity());
+//        memoryList = MemoryManager.getMemories(getActivity());
 
         if (memoryList != null) {
-            adapter = new MemoryAdapter(getActivity(), R.layout.memory_list_item, memoryList);
+            adapter = new MemoryAdapter(getActivity(), R.layout.memory_list_item, mgr.getMemories(getActivity()));
             setListAdapter(adapter);
         }
 
@@ -108,7 +108,7 @@ public class MemoryListFragment extends ListFragment {
             case R.id.actions_refresh : {
                 Log.i(TAG, "Refresh from fragments");
 
-                updateList();
+//                updateList();
                 adapter.notifyDataSetChanged();
                 return true;
             }
@@ -116,10 +116,10 @@ public class MemoryListFragment extends ListFragment {
         return super.onOptionsItemSelected(item);
     }
 
-    private void updateList() {
-//        MemoryManager mgr = MemoryManager.newInstance(getActivity());
-        memoryList = MemoryManager.getMemories(getActivity());
-    }
+//    private void updateList() {
+//        MemoryManager mgr = MemoryManager.getInstance(getActivity());
+//        memoryList = mgr.getMemories(getActivity());
+//    }
 
     // Contextual Actionbar Callback
     private ActionMode.Callback actionModeCallback = new ActionMode.Callback() {
