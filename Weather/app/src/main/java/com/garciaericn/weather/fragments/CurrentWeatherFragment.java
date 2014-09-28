@@ -37,11 +37,6 @@ public class CurrentWeatherFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        this.activity = activity;
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_current_weather, container, false);
 
